@@ -26,7 +26,7 @@ jinja_environment = jinja2.Environment(loader=
 	jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 # Bootstrap and Parsely
-header = "<head><link rel=\"stylesheet\" type=\"text/css\" href=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css\">	<script src=\"http://code.jquery.com/jquery-git1.min.js\"></script>	<script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js\"></script>	<link rel=\"stylesheet\" type=\"text/css\" href=\"http://parsleyjs.org/src/parsley.css\">	<script src=\"https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.2/parsley.min.js\"></script>	</head>"
+header = "<head>	<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/bootstrap.css\">	<script src=\"/s/jquery-git1.js\"></script>	<script src=\"/s/bootstrap.js\"></script>	<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/parsley.css\">	<script src=\"/s/parsley.js\"></script>	</head>"
 
 def SetTemplate(pageName):
 	return jinja_environment.get_template("%s.html" % pageName)
