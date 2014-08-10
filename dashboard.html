@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User List</title>
+	<style type="text/css">
+		body { margin-top: 52px; }
+		.borderless { border: 1px solid transparent; }
+		.padded { padding: 20px 90px 10px 80px; }
+		.pull-center { float: none; }
+		.blank { color: transparent; min-width: 104px; }
+	</style>
+</head>
+<body>
+	<!-- A Navbar-ish looking thing with the title and sign in/up button(s) at the right -->
+	<nav class="navbar navbar-default navbar-fixed-top borderless" role="navigation">
+	<div class="container">
+			<a class="navbar-brand" href="#">Profile's List</a>
+			<div class="navbar-form navbar-right">
+				<a href="/signup"><button class="btn btn-primary">Sign up</button></a>
+				<!-- Not Functional yet -->
+				<a href="/login"><button class="btn btn-default">Login</button></a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="padded">
+		<table class="table table-hover table-condensed">
+			<thead class="text-center">
+				<th class="text-center col-md-3">Name</th>
+				<th class="text-center col-md-6">Univesity</th>
+				<th class="text-center col-md-3">Profile</th>
+				<th class="text-center blank">&times;</th>
+			</thead>
+			<tbody>
+				{% for student in students %}
+					<tr>						
+						<td class="text-center">{{ student.name }}</td>
+						<td class="text-center">{{ student.uni }}</td>
+						<td class="text-center"><a href="{{ student.url() }}">View Profile</a></td>
+						<td class="text-center">
+							<a href="{{ student.delete }}">								
+							<button type="button" class="close pull-center">
+								<span aria-hidden="true">&times;</span><span class="sr-only"></span>
+							</button>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(".delete").onclick(function () {
+				// Do somthing
+				// student.delete
+			});
+		});
+	</script>
+</body>
+</html>

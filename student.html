@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{{ student.name }}'s Profile Page</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1>
+				Hello {{ student.name }} 
+				{% if student.uni %}
+					from {{ student.uni }}
+				{% endif %}
+				!
+			</h1>
+				<h2>Check it out!:</h2>
+			<div>
+				<!-- Need to do a nested, normal for loop -->
+				{% for photo in photos %}
+					{# {% for loop.index0 in photo1 %} #}
+					<img src="{{ photo }}" width="275px" height="275px">
+					{# {% endfor %} #}
+				{% endfor %}
+			</div>
+		</div>
+	</body>
+</html>

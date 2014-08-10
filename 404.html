@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>404 Not Found</title>
+	<script src="http://code.jquery.com/jquery-git1.min.js"></script>
+	<style type="text/css">
+		h1 { font-size: -webkit-xxx-large; font-weight: bold; }
+		strong { font-size: -webkit-xxx-large; }
+	</style>
+</head>
+<body>
+	<div id="text">		
+		<h1>404 Not Found</h1>
+		This resource could not be found.
+		<br />
+		<strong>Sorry! :(</strong>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var pageMiddle = (($(window).height() / 2) - ($("#text").height()/ 2))
+
+			var style = document.createElement("style");
+			style.type = "text/css";
+			style.innerHTML = "h1 { font-size: -webkit-xxx-large; } .centered { color: red; text-align: center; margin-top: " + pageMiddle + "px }";
+			document.getElementsByTagName("head")[0].appendChild(style);
+
+			document.getElementById("text").className = "centered";			
+		})
+	</script>
+</body>
+</body>
+</html>
