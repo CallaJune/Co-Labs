@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Workspace</title>
+	<style type="text/css" media="screen">
+		html, body {
+		border: 0px;
+		margin-top: 25px;
+		padding: 0px;
+		}
+		.borderless { border: 1px solid transparent; }
+		.padded { padding: 20px 90px 10px 80px; }
+		.pull-center { float: none; }
+		.blank { color: transparent; min-width: 104px; }
+		#editor { 
+		    margin: 0;
+		    position: relative;
+		    width: 100%;
+		    height: 100%; 
+		}
+		.level {
+			display:block;
+			min-height: 50%;
+			min-width:800px;
+			overflow: scroll;
+		}
+		#browseinput {
+			margin-top: 8px;
+		}
+		iframe {
+			width: 100%;
+			height: 50%;
+		}
+		#searches {
+			max-height: 50%;
+			overflow: scroll;
+		}
+		.gsc-search-button {
+			visibility: hidden;
+		}
+	</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top borderless" role="navigation">
+	<div class="container">
+			<a class="navbar-brand" href="#">Co-Labs</a>
+			<div class="col-md-4" id="browseinput">
+			<gcse:searchbox></gcse:searchbox>
+			<!--<input type="text" class="form-control" name="searchbar" placeholder="Search or URL">-->
+			</div>
+			<div class="navbar-form navbar-right">
+				<a href="/signup"><button class="btn btn-primary">Sign up</button></a>
+				<a href="/login"><button class="btn btn-default">Login</button></a>
+			</div>
+	</div>
+	</nav>	
+	<div id="searches">
+	<gcse:searchresults></gcse:searchresults>
+	<!--<gcse:searchresults linktarget="_self"></gcse:searchresults>-->
+	</div>
+	
+	<div class='level'  id="editor">
+		function foo(items) {
+		var i;
+		for (i = 0; i &lt; items.length; i++) {
+		    alert("4NRs rocks! " + items[i]);
+		}
+		}
+	</div>
+</body>
+	<script src="s/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		
+		var editor = ace.edit("editor");
+		editor.setTheme("ace/theme/monokai");
+		editor.getSession().setMode("ace/mode/javascript");
+
+		(function() {
+		  var cx = '014233615630466551313:f2mq3bxfnbi';
+		  var gcse = document.createElement('script');
+		  gcse.type = 'text/javascript';
+		  gcse.async = true;
+		  gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+		      '//www.google.com/cse/cse.js?cx=' + cx;
+		  var s = document.getElementsByTagName('script')[0];
+		  s.parentNode.insertBefore(gcse, s);
+		})();
+</script>
+<gcse:searchresults-only></gcse:searchresults-only>
+	</script>
+</html>
