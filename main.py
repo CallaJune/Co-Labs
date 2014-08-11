@@ -90,6 +90,10 @@ class GenericHandler(webapp2.RequestHandler):
 		template = SetTemplate(self.pageName)
 		self.response.out.write(template.render())
 
+class HomeHandler(GenericHandler):
+	def get(self):
+		self.pageName = "home"
+
 class SingupHandler(GenericHandler):
 	def get(self):
 		self.pageName = "signup"
@@ -98,9 +102,11 @@ class NotFoundHandler(GenericHandler):
 	def get(self):
 		self.pageName = "404"
 
-# End Generic Handlers
+class WorkspaceHandler(GenericHandler):
+	def get(self):
+		self.pageName = "workspace"
 
-# For deletion => self.redirect
+# End Generic Handlers
 
 def GetAnswers(inputValues):
 	answers = []
@@ -121,7 +127,7 @@ routes = [
 		("/profile", ProfileHandler),
 		("/dashboard", DashboardHandler),
 		("/signup", SingupHandler),
-		("/", SingupHandler),
+		("/", WorkspaceHandler),
 		("/.*", NotFoundHandler),
 ]
 
