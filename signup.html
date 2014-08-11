@@ -4,47 +4,18 @@
 		<meta charset="utf-8">
 		<title>Create a New Profile</title>
 		<style type="text/css">
-			.rigid
-			{
-				width: 350px;
-			}
-			.dotted
-			{
-				border: 2px dashed darkgrey;
-			}
+			.rigid { width: 350px; }
+			.dotted { border: 2px dashed darkgrey; }
+			#text { vertical-align: top; }
 		</style>
 	</head>
 	<body>
-		<!-- <table id="table2"> -->
-			<!-- <td><i class="fa fa-home fa-2x"></i></td> -->
-			<!-- <td><span class="glyphicon glyphicon-home"></span></td> -->
-		<!-- </table> -->
 		<table id="table">
-			<td>
-				<div class="container rigid">
-					<h1 class="text-center">Login:</h1>
-					<br>
-					<!-- Convert into Horizontal? -->
-					<form action="/profile" data-parsley-validate>
-						<input name="email" placeholder="Email" required class="form-control" type="email">
-						<br />
-						<input name="name" placeholder="Password" required class="form-control" type="password">
-						<br />
-						<!-- <div class="text-center text-muted">all fields are required</div> -->
-						<!-- <br /> -->
-						<div class="text-center">
-							<button class="btn btn-success" type="submit">Login <i class="fa fa-lock"></i></button>
-						</div>
-					</form>
-				</div>
-			</td>
-			<td class="dotted">
-			</td>
+			<tr id="text">
 			<td>
 				<div class="container rigid">
 					<h1 class="text-center">Sign up:</h1>
 					<br>
-					<!-- Convert into Horizontal? -->
 					<form action="/profile" class="form-horizontal" role="form" data-parsley-validate>
 						<div class="form-group">
 							<div class="col-md-6">
@@ -68,6 +39,26 @@
 					</form>
 				</div>
 			</td>
+			<td class="dotted"></td>
+			<td>
+				<div class="container rigid">
+					<h1 class="text-center">Login:</h1>
+					<br>
+					<!-- Convert into Horizontal? -->
+					<form action="/profile" data-parsley-validate>
+						<input name="email" placeholder="Email" required class="form-control" type="email">
+						<br />
+						<input name="name" placeholder="Password" required class="form-control" type="password">
+						<br />
+						<!-- <div class="text-center text-muted">all fields are required</div> -->
+						<!-- <br /> -->
+						<div class="text-center">
+							<button class="btn btn-success" type="submit">Login <i class="fa fa-lock"></i></button>
+						</div>
+					</form>
+				</div>
+			</td>
+			</tr>
 		</table>
 
 		<script type="text/javascript">
