@@ -6,39 +6,86 @@
 		<style type="text/css">
 			.rigid
 			{
-				width: 400px;
-				margin-top: 100px;
+				width: 350px;
+			}
+			.dotted
+			{
+				border: 2px dashed darkgrey;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="container rigid">
-			<h1 class="text-center">Create A New Profile:</h1>
-			<br>
-			<!-- Convert into Horizontal? -->
-			<form action="/profile" data-parsley-validate>
-				<label >First Name* : </label>
-				<input name="fist" placeholder="Pepito Suarez" required class="form-control" type="text">
-				<br />
-				<label >Last Name* : </label>
-				<input name="last" placeholder="Pepito Suarez" required class="form-control" type="text">
-				<br />
-				<label >Email* : </label>
-				<input name="email" placeholder="Pepito Suarez" required class="form-control" type="email">
-				<br />
-				<label >Password* : </label>
-				<input name="name" placeholder="Pepito Suarez" required class="form-control" type="password">
-				<br />
-				<div class="text-center text-muted">* = required</div>
-				<br />
-				<div class="text-center">
-					<button class="btn btn-success" type="submit">Add Student</button>
+		<!-- <table id="table2"> -->
+			<!-- <td><i class="fa fa-home fa-2x"></i></td> -->
+			<!-- <td><span class="glyphicon glyphicon-home"></span></td> -->
+		<!-- </table> -->
+		<table id="table">
+			<td>
+				<div class="container rigid">
+					<h1 class="text-center">Login:</h1>
+					<br>
+					<!-- Convert into Horizontal? -->
+					<form action="/profile" data-parsley-validate>
+						<input name="email" placeholder="Email" required class="form-control" type="email">
+						<br />
+						<input name="name" placeholder="Password" required class="form-control" type="password">
+						<br />
+						<!-- <div class="text-center text-muted">all fields are required</div> -->
+						<!-- <br /> -->
+						<div class="text-center">
+							<button class="btn btn-success" type="submit">Login <i class="fa fa-lock"></i></button>
+						</div>
+					</form>
 				</div>
-				<input type="hidden" name="new" value="true">
-			</form>
-		</div>
+			</td>
+			<td class="dotted">
+			</td>
+			<td>
+				<div class="container rigid">
+					<h1 class="text-center">Sign up:</h1>
+					<br>
+					<!-- Convert into Horizontal? -->
+					<form action="/profile" class="form-horizontal" role="form" data-parsley-validate>
+						<div class="form-group">
+							<div class="col-md-6">
+								<input name="fist" placeholder="First Name" required class="form-control" role="form" type="text">								
+							</div>
+							<div class="col-md-6">
+								<input name="last" placeholder="Last Name" required class="form-control" type="text">
+							</div>
+						</div>
+						<input name="email" placeholder="Email" required class="form-control" type="email">
+						<br />
+						<input name="name" placeholder="Password" required class="form-control" type="password">
+						<br />
+						<!-- <div class="text-center text-muted">all fields are required</div> -->
+						<!-- <br /> -->
+						<div class="text-center">
+							<button class="btn btn-success" type="submit">Sign up <i class="fa fa-lock"></i></button>
+
+						</div>
+						<input type="hidden" name="new" value="true">
+					</form>
+				</div>
+			</td>
+		</table>
+
+		<script type="text/javascript">
+			$(document).ready(function () {
+				var halfHeight = (($(window).height() / 2) - ($("#table").height()/ 2))
+				var halfWidth = (($(window).width() / 2) - ($("#table").width()/ 2))
+
+				var style = document.createElement("style");
+				style.type = "text/css";
+				style.innerHTML = ".centered { margin-left: " + halfWidth + "px; margin-top: " + halfHeight + "px }";
+				document.getElementsByTagName("head")[0].appendChild(style);
+
+				document.getElementById("table").className = "centered";
+			})
+		</script>
 	</body>
 </html>
 
+<!-- <div class="input-group-addon">@</div> -->
 
 <!-- <input type="checkbox"> Remember me -->

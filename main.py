@@ -26,7 +26,7 @@ jinja_environment = jinja2.Environment(loader=
 	jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 # Bootstrap and Parsely
-header = "<head>	<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/bootstrap.css\">	<script src=\"/s/jquery-git1.js\"></script>	<script src=\"/s/bootstrap.js\"></script>	<link rel=\"stylesheet\" type=\"text/css\" href=\"/s/parsley.css\">	<script src=\"/s/parsley.js\"></script>	</head>"
+header = '<head>	<link rel="stylesheet" type="text/css" href="/s/b/css/bootstrap.css">	<script src="/s/jquery-git1.js"></script>	<script src="/s/b/js/bootstrap.js"></script>	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">	<link rel="stylesheet" type="text/css" href="/s/parsley.css">	<script src="/s/parsley.js"></script>	</head>'
 
 def SetTemplate(pageName):
 	return jinja_environment.get_template("%s.html" % pageName)
@@ -78,7 +78,6 @@ class ProfileHandler(webapp2.RequestHandler):
 				}
 		}
 
-		# template_values["photos"] = GetPictures(template_values["student"]["uni"])
 		self.response.out.write(template.render(template_values))
 
 # Start Generic Handlers
