@@ -15,17 +15,10 @@
 	</nav>	
 	<div id="searches">
 		<gcse:searchresults></gcse:searchresults>
-		<!--<gcse:searchresults linktarget="_self"></gcse:searchresults>-->
 	</div>
 	
-	<div class='level' id="editor">
-		function foo(items) {
-			var i;
-			for (i = 0; i &lt; items.length; i++) {
-				alert("4NRs rocks! " + items[i]);
-			}
-		}
-	</div>
+	{# User's Code will go here #}
+	<div class='level' id="editor">// Insert your code here!</div>
 
 	<script type="text/javascript">
 		var editor = ace.edit("editor");
@@ -41,7 +34,5 @@
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(gcse, s);
 		})();
-	</script>
-	<gcse:searchresults-only></gcse:searchresults-only>
-	
+	</script>	
 {% endblock %}
