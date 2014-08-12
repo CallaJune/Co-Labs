@@ -1,18 +1,33 @@
 {% extends "layouts/main.html" %}
 
 {% block maincontent %}
-
-<h1>Recover password</h1>
-
-<p>Forgot your password? Click the link below to receive a link to recover your password.</p>
-
-{% if not_found %}
-    <strong>Not found!</strong> We could not found any user with the given username.
-{% endif %} 
-
-<form class="form" action= "/forgot" method="POST">
-	<input type="text" value="{{ username }}" name="username"/>
-	<input type="submit" value="Send password reset link"/>
-</form>
+	<style type="text/css">
+		.rigid { width: 200px; display: initial; }
+		.error 
+		{ 
+			color: #B94A48;
+			background-color: #F2DEDE;
+			border: 1px solid #EED3D7;
+			border-radius: 5px;
+		}
+	</style>
+	<div class="container text-center">
+		<h1>Recover password</h1>
+	
+		<p>Forgot your password? Click the link below to receive a link to recover your password.</p>
+		<br />
+	
+		{% if not_found %}
+			<p><div class="error">				
+		    	<strong>Not found!</strong> We could not found any user with the given username. 
+			</div></p>
+		{% endif %} 
+	
+		<form class="form" action= "/forgot" method="POST"  role="form" type="text" data-parsley-validate>
+			<input type="text" value="{{ username }}" name="username" class="form-control rigid text-center" required/>
+			<br />
+			<input type="submit" value="Send password reset link" class="btn btn-success rigid" />
+		</form>
+	</div>
 
 {% endblock %}

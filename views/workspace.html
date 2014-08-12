@@ -9,7 +9,8 @@
 			<!--<input type="text" class="form-control" name="searchbar" placeholder="Search or URL">-->
 			</div>
 			<div class="navbar-form navbar-right">
-				<a href="{{user.profile_link()}}">{{user.email_address}} <i class="fa fa-home"></i></a>
+				<a href="{{ user.profile_link() }}"><button class="btn btn-default"><i class="fa fa-home"></i> Profile</button></a>
+				<a href="/logout"><button class="btn btn-danger">Logout</button></a> 
 			</div>
 		</div>
 	</nav>	

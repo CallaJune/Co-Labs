@@ -45,7 +45,6 @@ class User(webapp2_extras.appengine.auth.models.User):
     return None, None
 
 """
-
     check = True
     i = 0
     while check:
@@ -59,8 +58,6 @@ class User(webapp2_extras.appengine.auth.models.User):
     user_name = username
 """
 
-
-
 class Lab(ndb.Model):
   name = ndb.StringProperty(required=True)
   collaborators = ndb.StringProperty(repeated=True)
@@ -71,4 +68,3 @@ class Lab(ndb.Model):
   
   def lab_link(self):
     return "/l/{0}".format(self.key.id())
-

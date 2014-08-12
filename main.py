@@ -1,19 +1,19 @@
-#!/usr/bin/env python
-import logging
-import jinja2
-import os
-import webapp2
-import urllib, hashlib
+from webapp2_extras.auth import InvalidPasswordError
+from webapp2_extras.auth import InvalidAuthIdError
 
 from google.appengine.ext import ndb
 
-from webapp2_extras import auth
 from webapp2_extras import sessions
-
-from webapp2_extras.auth import InvalidAuthIdError
-from webapp2_extras.auth import InvalidPasswordError
+from webapp2_extras import auth
 
 from models import User, Lab
+
+import urllib, hashlib
+import webapp2
+import logging
+import jinja2
+import time
+import os
 
 jinja_environment = jinja2.Environment(loader=
 		jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -33,7 +33,6 @@ def user_required(handler):
 			return handler(self, *args, **kwargs)
 
 	return check_login
-
 
 class BaseHandler(webapp2.RequestHandler):
 	@webapp2.cached_property
@@ -105,10 +104,6 @@ class BaseHandler(webapp2.RequestHandler):
 			finally:
 				# Save all sessions.
 				self.session_store.save_sessions(self.response)
-
-class NotFoundHandler(BaseHandler):
-	def get(self):
-		self.render_template('404')
 
 class MainHandler(BaseHandler):
 	def get(self):
@@ -199,7 +194,8 @@ class VerificationHandler(BaseHandler):
 			logging.info('Could not find any user with id "%s" signup token "%s"',
 				user_id, signup_token)
 			self.abort(404)
-		
+			# TODO override abort
+
 		# store user data in the session
 		self.auth.set_session(self.auth.store.user_to_dict(user), remember=True)
 
@@ -223,6 +219,7 @@ class VerificationHandler(BaseHandler):
 		else:
 			logging.info('verification type not supported')
 			self.abort(404)
+			# TODO override abort
 
 class SetPasswordHandler(BaseHandler):
 	@user_required
@@ -271,11 +268,19 @@ class LogoutHandler(BaseHandler):
 		self.auth.unset_session()
 		self.redirect(self.uri_for('home'))
 
-class AuthenticatedHandler(BaseHandler):
-	@user_required
-	def get(self):
-		self.render_template('authenticated')
+config = {
+	'webapp2_extras.auth': {
+		'user_model': 'models.User',
+		'user_attributes': ['name']
+	},
+	'webapp2_extras.sessions': {
+		'secret_key': '{z-0NJ]?VmFZTWvHX{;jGzO<c4-@Uk58 b|Ak }_wu+1mWk )>Vc5K7{b--fj%%l'
+	}
+}
 
+# End Authentication?
+
+# what the fuck is this shit doing with kwargs??
 class ProfileHandler(BaseHandler):
 	@user_required
 	def get(self, *args, **kwargs):
@@ -303,14 +308,13 @@ class ProfileHandler(BaseHandler):
 		else:
 			self.redirect(self.uri_for('home'))
 
-# End Authentication
-
 # Lab Handlers
 
 class NewLabHandler(BaseHandler):
 	@user_required
 	def get(self):
 		self.render_template('new_lab')
+
 	def post(self):
 		name = self.request.get('name')
 		owner = self.request.get('owner')
@@ -324,8 +328,10 @@ class NewLabHandler(BaseHandler):
 		lab = Lab(name=name,
 				owner=owner,
 				private=private,
-				collaborators= collaborators.split(","))
+				collaborators= collaborators.split(", "))
 		lab.put()
+
+		time.sleep(1)
 		self.redirect(self.uri_for('home'))
 
 class LabHandler(BaseHandler):
@@ -357,15 +363,9 @@ class DeleteLabHandler(webapp2.RequestHandler):
 
 # End labs
 
-config = {
-	'webapp2_extras.auth': {
-		'user_model': 'models.User',
-		'user_attributes': ['name']
-	},
-	'webapp2_extras.sessions': {
-		'secret_key': '{z-0NJ]?VmFZTWvHX{;jGzO<c4-@Uk58 b|Ak }_wu+1mWk )>Vc5K7{b--fj%%l'
-	}
-}
+class NotFoundHandler(BaseHandler):
+	def get(self):
+		self.render_template('404')
 
 routes = [
 		webapp2.Route('/', MainHandler, name='home'),
@@ -382,11 +382,10 @@ routes = [
 		webapp2.Route('/login', LoginHandler, name='login'),
 		webapp2.Route('/logout', LogoutHandler, name='logout'),
 		webapp2.Route('/forgot', ForgotPasswordHandler, name='forgot'),
-		webapp2.Route('/authenticated', AuthenticatedHandler, name='authenticated'),
 		("/.*", NotFoundHandler),
 ]
 
 app = webapp2.WSGIApplication(routes, debug=True, config=config)
 
 # What's this for?
-logging.getLogger().setLevel(logging.DEBUG)
+# logging.getLogger().setLevel(logging.DEBUG)
