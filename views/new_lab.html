@@ -1,0 +1,13 @@
+{% extends "layouts/main.html" %}
+
+{% block maincontent %}
+<h1>Welcome To Co Labs | Create a Lab</h1>
+
+<form action="/new_lab" method="post">
+	Collaborators:<input name='emails' placeholder='example@example.com, sam@example.com'></input>
+	Name of Lab:<input name='name' placeholder='name'></input>
+	Make Private:<input name='private' type='checkbox' value='true'></input>
+	<input name='owner' type='hidden' value='{{user.email_address}}'></input>
+	<input type='submit'>
+</form>
+{% endblock %}

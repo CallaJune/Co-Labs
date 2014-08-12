@@ -1,4 +1,4 @@
-application: project
+application: helloworld-wilfried
 version: 1
 runtime: python27
 api_version: 1
@@ -12,15 +12,26 @@ handlers:
 - url: /s
   static_dir: s
 
+- url: /signup
+  script: main.app
+  secure: always
+
+- url: /login
+  script: main.app
+  secure: always
+
+- url: /forgot
+  script: main.app
+  secure: always
+
 - url: .*
   script: main.app
-  login: required
 
 builtins:
 - remote_api: on
 
 libraries:
-- name: webapp2
-  version: "2.5.2"
 - name: jinja2
   version: latest
+- name: webapp2
+  version: "2.5.2"

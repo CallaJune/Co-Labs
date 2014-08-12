@@ -1,0 +1,20 @@
+{% extends "layouts/main.html" %}
+
+{% block maincontent %}
+<h1>Dashboard: {{local_user.name}} {{local_user.last_name}}</h1>
+<img src="{{local_user.gravatarize()}}">
+<br/>
+<table>
+	{%for lab in labs %}
+	<tr><a href="{{lab.lab_link()}}">{{lab.name}}</a></tr>
+	<br/>
+{% endfor%}
+</table>
+<form action="/new_lab" method="post">
+	Collaborators:<input name='emails' placeholder='example@example.com, sam@example.com'></input>
+	Name of Lab:<input name='name' placeholder='name'></input>
+	Make Private:<input name='private' type='checkbox' value='true'></input>
+	<input name='owner' type='hidden' value='{{user.email_address}}'></input>
+	<input type='submit'>
+</form>
+{% endblock %}

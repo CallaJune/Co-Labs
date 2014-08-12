@@ -1,33 +1,32 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Create a New Profile</title>
+{% extends "layouts/main.html" %}
+
+{% block title %}Create an Account{% endblock %}
+
+{% block maincontent %}
 		<style type="text/css">
 			.rigid { width: 350px; }
 			.dotted { border: 2px dashed darkgrey; }
 			#text { vertical-align: top; }
 		</style>
-	</head>
-	<body>
+
 		<table id="table">
 			<tr id="text">
 			<td>
 				<div class="container rigid">
 					<h1 class="text-center">Sign up:</h1>
 					<br>
-					<form action="/profile" class="form-horizontal" role="form" data-parsley-validate>
+					<form action="/signup" method="post" class="form-horizontal" role="form" data-parsley-validate>
 						<div class="form-group">
 							<div class="col-md-6">
-								<input name="fist" placeholder="First Name" required class="form-control" role="form" type="text">								
+								<input name="name" placeholder="First Name" required class="form-control" role="form" type="text">								
 							</div>
 							<div class="col-md-6">
-								<input name="last" placeholder="Last Name" required class="form-control" type="text">
+								<input name="lastname" placeholder="Last Name" required class="form-control" type="text">
 							</div>
 						</div>
 						<input name="email" placeholder="Email" required class="form-control" type="email">
 						<br />
-						<input name="name" placeholder="Password" required class="form-control" type="password">
+						<input name="password" placeholder="Password" required class="form-control" type="password">
 						<br />
 						<!-- <div class="text-center text-muted">all fields are required</div> -->
 						<!-- <br /> -->
@@ -43,17 +42,22 @@
 			<td>
 				<div class="container rigid">
 					<h1 class="text-center">Login:</h1>
+					{% if failed %}
+					<strong>Login failed!</strong> Check your credentials and try again.
+					{% endif %}
 					<br>
 					<!-- Convert into Horizontal? -->
-					<form action="/profile" data-parsley-validate>
-						<input name="email" placeholder="Email" required class="form-control" type="email">
+					<form action= "/login" method="post" data-parsley-validate>
+
+						<input name="email" placeholder="Email" value="{{email}}" required class="form-control" type="email">
 						<br />
-						<input name="name" placeholder="Password" required class="form-control" type="password">
+						<input  name="password" placeholder="Password" required class="form-control" type="password">
 						<br />
 						<!-- <div class="text-center text-muted">all fields are required</div> -->
 						<!-- <br /> -->
 						<div class="text-center">
 							<button class="btn btn-success" type="submit">Login <i class="fa fa-lock"></i></button>
+							<a href="/forgot">Forgot password</a>
 						</div>
 					</form>
 				</div>
@@ -74,9 +78,4 @@
 				document.getElementById("table").className = "centered";
 			})
 		</script>
-	</body>
-</html>
-
-<!-- <div class="input-group-addon">@</div> -->
-
-<!-- <input type="checkbox"> Remember me -->
+{% endblock %}
