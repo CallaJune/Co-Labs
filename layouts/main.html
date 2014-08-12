@@ -1,51 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>{% block title %}CoLabs{% endblock %}</title>
-      <link rel="stylesheet" type="text/css" href="/s/b/css/bootstrap.css"> 
-      <script src="/s/jquery-git1.js"></script>
-      <script src="/s/b/js/bootstrap.js"></script>  
-      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
-      <link rel="stylesheet" type="text/css" href="/s/parsley.css"> <script src="/s/parsley.js"></script> 
-    <style>
-      input {
-        display: block;
-      }
-    </style>
-  </head>
+<html>
+	<head>
+		<title>{% block title %}CoLabs{% endblock %}</title>
+		<link rel="stylesheet" type="text/css" href="/s/b/css/bootstrap.css"> 
+		<script src="/s/jquery-git1.js"></script>
+		<script src="/s/b/js/bootstrap.js"></script>	
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/s/parsley.css">
+		<script src="/s/parsley.js"></script> 
+		<style>
+			input { display: block; }
+		</style>
+	</head>
+	<body>
+		<div>
+			<footer>
+				<p>
+					{% if not user %}
+						<a href="/login">Login (and forgot password)</a>
+					{% else %}
+						Logged in as <span style="background-color: OldLace">
+						<img src="">{{ user.name }}</span> | <a href="/logout">Logout</a>
+						<h1>Email: {{ user.email_address }}!</h1>
+						<a href="{{user.profile_link()}}">Your Profile</a>
+					{% endif %}
+					|
+					<a href="/">Home</a>
+					|
+					<a href="/signup">New user</a>
+					|
+					<a href="/authenticated">Secured page</a> (you can see this after login)
+				</p>
+				<p>
+				</p>
+				<hr/>
+			</footer>
+		</div>
+		<div class="content">
+			{% block maincontent %}
 
-  <body>
-
-  <div class="content">
-    {% block maincontent %}
-
-    {% endblock %}
-  </div>
-
-  <div>
-    <footer>
-      <hr/>
-      <p>
-        {% if not user %}
-          <a href="/login">Login (and forgot password)</a>
-        {% else %}
-          Logged in as <span style="background-color: OldLace"><img src="">{{ user.name }}</span> | <a href="/logout">Logout</a>
-          <h1>Email: {{ user.email_address }}!</h1>
-          <a href="{{user.profile_link()}}">Your Profile</a>
-        {% endif %}
-        |
-        <a href="/">Home</a>
-        |
-        <a href="/signup">New user</a>
-        |
-        <a href="/authenticated">Secured page</a> (you can see this after login)
-      </p>
-      <p>
-      </p>
-    </footer>
-  </div>
-
-
-  </body>
+			{% endblock %}
+		</div>
+	</body>
 </html>

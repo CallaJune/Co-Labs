@@ -18,6 +18,8 @@ from models import User, Lab
 jinja_environment = jinja2.Environment(loader=
 		jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
+# Start Authentication
+
 def user_required(handler):
 	"""
 		Decorator that checks if there's a user associated with the current session.
@@ -82,7 +84,7 @@ class BaseHandler(webapp2.RequestHandler):
 			params = {}
 		user = self.user
 		params['user'] = user
-		template = jinja_environment.get_template('views/%s' % view_filename)
+		template = jinja_environment.get_template('views/%s.html' % view_filename)
 		self.response.out.write(template.render(params))
 
 	def display_message(self, message):
@@ -90,7 +92,7 @@ class BaseHandler(webapp2.RequestHandler):
 		params = {
 			'message': message
 		}
-		self.render_template('message.html', params)
+		self.render_template('message', params)
 
 	# this is needed for webapp2 sessions to work
 	def dispatch(self):
@@ -98,22 +100,26 @@ class BaseHandler(webapp2.RequestHandler):
 			self.session_store = sessions.get_store(request=self.request)
 
 			try:
-					# Dispatch the request.
-					webapp2.RequestHandler.dispatch(self)
+				# Dispatch the request.
+				webapp2.RequestHandler.dispatch(self)
 			finally:
-					# Save all sessions.
-					self.session_store.save_sessions(self.response)
+				# Save all sessions.
+				self.session_store.save_sessions(self.response)
+
+class NotFoundHandler(BaseHandler):
+	def get(self):
+		self.render_template('404')
 
 class MainHandler(BaseHandler):
 	def get(self):
 		if self.user:
 			self.redirect(self.user.profile_link())
 		else:
-			self.render_template('home.html')
+			self.render_template('home')
 
 class SignupHandler(BaseHandler):
 	def get(self):
-		self.render_template('signup.html')
+		self.render_template('signup')
 
 	def post(self):
 		email = self.request.get('email')
@@ -173,8 +179,7 @@ class ForgotPasswordHandler(BaseHandler):
 			'email': email,
 			'not_found': not_found
 		}
-		self.render_template('forgot.html', params)
-
+		self.render_template('forgot', params)
 
 class VerificationHandler(BaseHandler):
 	def get(self, *args, **kwargs):
@@ -214,13 +219,12 @@ class VerificationHandler(BaseHandler):
 				'user': user,
 				'token': signup_token
 			}
-			self.render_template('resetpassword.html', params)
+			self.render_template('resetpassword', params)
 		else:
 			logging.info('verification type not supported')
 			self.abort(404)
 
 class SetPasswordHandler(BaseHandler):
-
 	@user_required
 	def post(self):
 		password = self.request.get('password')
@@ -260,7 +264,7 @@ class LoginHandler(BaseHandler):
 			'email': email,
 			'failed': failed
 		}
-		self.render_template('login.html', params)
+		self.render_template('login', params)
 
 class LogoutHandler(BaseHandler):
 	def get(self):
@@ -270,12 +274,11 @@ class LogoutHandler(BaseHandler):
 class AuthenticatedHandler(BaseHandler):
 	@user_required
 	def get(self):
-		self.render_template('authenticated.html')
+		self.render_template('authenticated')
 
 class ProfileHandler(BaseHandler):
 	@user_required
 	def get(self, *args, **kwargs):
-
 		user_id = int(kwargs['user_id'])
 		name = kwargs['name'].lower()
 		request_type = kwargs['type'].lower()
@@ -294,16 +297,20 @@ class ProfileHandler(BaseHandler):
 				'labs': labs,
 				'local_user': local_user
 				}
-				self.render_template('profile.html', params)
+				self.render_template('profile', params)
 			else:
 				self.display_message('The user who\'s profile you attempted to view does not exist. <a href="/p/{0}.{1}/{2}">Go your profile.</a>'.format(user.name, user.last_name, user.key.id()))
 		else:
 			self.redirect(self.uri_for('home'))
 
+# End Authentication
+
+# Lab Handlers
+
 class NewLabHandler(BaseHandler):
 	@user_required
 	def get(self):
-		self.render_template('new_lab.html')
+		self.render_template('new_lab')
 	def post(self):
 		name = self.request.get('name')
 		owner = self.request.get('owner')
@@ -328,13 +335,13 @@ class LabHandler(BaseHandler):
 		lab = Lab.get_by_id(int(lab_id))
 		if lab:
 			params = {
-			'lab': lab
+				'lab': lab
 			}
 			lab.put()
-			self.render_template('workspace.html', params)
+			self.render_template('workspace', params)
 		else:
 			params = {
-			'lab_id': lab_id
+				'lab_id': lab_id
 			}
 			self.display_message('There is no such lab registered under your name. <a href="/new_lab">Create A New Lab</a>')
 
@@ -346,7 +353,9 @@ class DeleteLabHandler(webapp2.RequestHandler):
 			lab.key.delete()
 			self.redirect(self.uri_for('home'))
 		else:
-		 self.display_message('There is no lab by this id.')
+			self.display_message('There is no lab by this id.')
+
+# End labs
 
 config = {
 	'webapp2_extras.auth': {
@@ -374,8 +383,10 @@ routes = [
 		webapp2.Route('/logout', LogoutHandler, name='logout'),
 		webapp2.Route('/forgot', ForgotPasswordHandler, name='forgot'),
 		webapp2.Route('/authenticated', AuthenticatedHandler, name='authenticated'),
+		("/.*", NotFoundHandler),
 ]
 
 app = webapp2.WSGIApplication(routes, debug=True, config=config)
 
+# What's this for?
 logging.getLogger().setLevel(logging.DEBUG)
