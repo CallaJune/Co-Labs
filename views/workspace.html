@@ -19,7 +19,7 @@
 	
 	{# User's Code will go here #}
 	<div class='level' id="editor">// Insert your code here!</div>
-
+git dig
 	<script type="text/javascript">
 		var editor = ace.edit("editor");
 		editor.setTheme("ace/theme/monokai");
@@ -35,4 +35,14 @@
 			s.parentNode.insertBefore(gcse, s);
 		})();
 	</script>	
-{% endblock %}
+
+
+	<script>
+  // TogetherJS start
+	$( document ).ready(function() {
+		var session = TogetherJS.require("session");
+	  	console.log(session);
+	});
+	</script>
+{% endblock %}<!-- Nothing should be bellow here -->
+

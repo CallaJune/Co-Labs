@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<div>
-			<footer>
+			<header>
 				<p>
 					{% if not user %}
 						<a href="/login">Login (and forgot password)</a>
@@ -26,15 +26,9 @@
 					{% endif %}
 					|
 					<a href="/">Home</a>
-					|
-					<a href="/signup">New user</a>
-					|
-					<a href="/authenticated">Secured page</a> (you can see this after login)
-				</p>
-				<p>
 				</p>
 				<hr/>
-			</footer>
+			</header>
 		</div>
 		<div class="content">
 			{% block maincontent %}

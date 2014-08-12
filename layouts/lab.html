@@ -7,6 +7,23 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/s/parsley.css">	<script src="/s/parsley.js"></script>
 	<script src="/s/src-noconflict/ace.js" type="text/javascript"></script>
+	<script>
+	  // TogetherJS configuration
+	  TogetherJSConfig_siteName = "CoLabs"
+	  TogetherJSConfig_toolName = "{{ lab.name }}"
+	  TogetherJSConfig_cloneClicks = ".together_click"
+	  TogetherJSConfig_findRoom = "{{lab.key.id()}}"
+	  TogetherJSConfig_autoStart = true
+	  TogetherJSConfig_suppressJoinConfirmation = true
+	  TogetherJSConfig_suppressInvite = true
+	  TogetherJSConfig_includeHashInUrl = true
+	  TogetherJSConfig_youtube = true
+	  TogetherJSConfig_ignoreMessages = true
+	  TogetherJSConfig_ignoreForms = [":password"]
+	  TogetherJSConfig_getUserName = function () {return '{{user.name}}';};
+	  TogetherJSConfig_getUserAvatar = function () {return '{{user.gravatarize()}}';};
+	</script>
+	<script src="https://togetherjs.com/togetherjs-min.js"></script>
 	<style type="text/css" media="screen">
 	html, body {
 		border: 0px;

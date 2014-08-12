@@ -119,7 +119,10 @@ class MainHandler(BaseHandler):
 
 class SignupHandler(BaseHandler):
 	def get(self):
-		self.render_template('signup')
+		if self.user:
+			self.redirect(self.user.profile_link())
+		else:
+			self.render_template('register')
 
 	def post(self):
 		email = self.request.get('email')
@@ -245,7 +248,10 @@ class SetPasswordHandler(BaseHandler):
 
 class LoginHandler(BaseHandler):
 	def get(self):
-		self._serve_page()
+		if self.user:
+			self.redirect(self.user.profile_link())
+		else:
+			self._serve_page()
 
 	def post(self):
 		email = self.request.get('email')
@@ -264,7 +270,7 @@ class LoginHandler(BaseHandler):
 			'email': email,
 			'failed': failed
 		}
-		self.render_template('login', params)
+		self.render_template('register', params)
 
 class LogoutHandler(BaseHandler):
 	def get(self):
