@@ -32,7 +32,6 @@
 							<div class="left-indent-sm">
 								{% for collaborator in lab.collaborators[:] %}
 									{% if collaborator != local_user.email_address %}
-										<!-- Key profile link of the collaborator -->
 										<a href="{{collaborator}}">{name} {{collaborator}}</a>
 										<br />
 									{% endif %}
@@ -47,7 +46,7 @@
 		</div>
 		<div class="box form-control pull-right text-center right-indent-lg rigid">
 			<h3>New Lab</h3>
-			<form action="/new_lab" method="post" data-parsley-validate>
+			<form action="/new_lab" method="POST" data-parsley-validate>
 				<input name="emails" placeholder="Collaborators' Email" required class="form-control" type="text">
 				<br />
 				<input name='name' placeholder='Lab Name' type="text" required class="form-control">
@@ -57,7 +56,6 @@
 				<input name='owner' type='hidden' value='{{user.email_address}}'>
 				<br />
 				<button class="btn btn-success" type="submit">Create New</button>
-				<!-- Does not refresh correctly -->
 			</form>
 		</div>
 		<div style="clear:both;"></div>
