@@ -1,11 +1,17 @@
-body {
+html {
     width: 100%;
     height: 100%;
 }
 
-html {
+body {
     width: 100%;
     height: 100%;
+    margin-top: 71px
+}
+
+#greeting
+{
+    color: white;
 }
 
 @media(min-width:767px) {
@@ -21,6 +27,12 @@ html {
         padding: 0;
     }
 }
+
+.btn-circle:hover 
+{
+    color: white;
+}
+
 .btn-circle {
     width: 70px;
     height: 70px;
@@ -29,22 +41,22 @@ html {
     border: 2px solid #fff;
     border-radius: 35px;
     font-size: 40px;
-    color: #fff;
+    color: white;
     background: 0 0;
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
     transition: background .3s ease-in-out;
 }
+
 .intro-section {
-    height: 100%;
-    padding-top: 260px;
+    height: 60%;
+    background-image: url('http://static.simpledesktops.com/uploads/desktops/2014/06/20/RainbowTiles_Wallpaper.png');
+    padding-top: 210px;
     text-align: center;
-<<<<<<< HEAD
+    vertical-align: center;
     position: relative;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.8);
-=======
->>>>>>> f09e757c6907fb6b231904430174db86f624b920
 }
 
 .learn-section {
