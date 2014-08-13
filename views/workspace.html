@@ -3,18 +3,31 @@
 {% block maincontent %}
 	<nav class="navbar navbar-default navbar-fixed-top borderless" role="navigation">
 		<div class="container">
-			<a class="navbar-brand" href="#">Co-Labs</a>
-			<div class="col-md-4" id="browseinput">
-			<gcse:searchbox></gcse:searchbox>
-			<!--<input type="text" class="form-control" name="searchbar" placeholder="Search or URL">-->
+			<a class="navbar-brand" href="#" >Co-Labs</a>
+			<div class="col-md-5" id="browseinput">
+				<div class="btn-group" data-toggle="buttons">
+				  <label class="btn  active">
+				    <input type="radio" name="options"  id="browser"checked><i class="fa fa-globe"></i> Browse
+				  </label>
+				  <label class="btn">
+				  	<script src="https://apis.google.com/js/platform.js"></script>
+					<input type="radio" name="options" id="hangout"><div id="placeholder-div2"></div>
+				    <g:hangout render="createhangout"
+				        invites="[{% for collaborator in lab.collaborators %}
+					    	{ id : '{{collaborator}}', invite_type : 'EMAIL' }
+					    	{% if not loop.last%},{% endif %}
+					    {% endfor %}]">
+				    </g:hangout>
+				  </label>
+				</div>
 			</div>
 			<div class="navbar-form navbar-right">
 				<a href="{{user.profile_link()}}">{{user.email_address}} <i class="fa fa-home"></i></a>
 			</div>
 		</div>
 	</nav>	
-	<div class='level' id='browse'>
-		<object type="text/html" data="http://www.coolbits.org/browse.php?u=https%3A%2F%2Fwww.google.co.uk%2F%3Fgws_rd%3Dssl&b=4" style="width:100%; height:50%"></object>
+	<div class='level' id='coolspace'>
+		
 	</div>
 	{# User's Code will go here #}
 	<div class='level' id="editor">
@@ -31,24 +44,8 @@
 		var editor = ace.edit("editor");
 		editor.setTheme("ace/theme/monokai");
 		editor.getSession().setMode("ace/mode/javascript");
-
-		(function() {
-			var cx = '014233615630466551313:f2mq3bxfnbi';
-			var gcse = document.createElement('script');
-			gcse.type = 'text/javascript';
-			gcse.async = true;
-			gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(gcse, s);
-		})();
-	</script>	
-
-
-	<script>
-  // TogetherJS start
-	$( document ).ready(function() {
-		var session = TogetherJS.require("session");
-	  	console.log(session);
-	});
+		$( document ).ready(function() {
+			$('#coolspace').append(browser);
+		});
 	</script>
 {% endblock %}<!-- Nothing should be bellow here -->
