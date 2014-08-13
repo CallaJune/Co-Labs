@@ -10,8 +10,8 @@ html {
 
 @media(min-width:767px) {
     .navbar {
-        padding: 20px 0;
-        opacity: 0.9;
+        padding: 10px 0;
+        opacity: 0.8;
         -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
@@ -21,17 +21,30 @@ html {
         padding: 0;
     }
 }
-
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+    padding: 7px 16px;
+    border: 2px solid #fff;
+    border-radius: 35px;
+    font-size: 40px;
+    color: #fff;
+    background: 0 0;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+}
 .intro-section {
     height: 100%;
     background-image: url('http://static.simpledesktops.com/uploads/desktops/2014/06/20/RainbowTiles_Wallpaper.png');
-    padding-top: 100px;
+    padding-top: 260px;
     text-align: center;
 }
 
 .learn-section {
     height: 100%;
-    background-image: url('http://static.simpledesktops.com/uploads/desktops/2011/10/19/Doppler_Effect.png');
+    background-image: url('http://i.imgur.com/kajMYj2.png');
     padding-top: 50px;
     text-align: center;
 }

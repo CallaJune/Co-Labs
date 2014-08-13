@@ -22,32 +22,35 @@
 			<h3 class="text-center">Open Lab Sessions</h3>
 			{% if labs %}
 				{% for lab in labs %}
+					<div>
+						<a href="{{lab.lab_link()}}" class="labs">{{lab.name}}</a>
+						<i class="fa fa-search-plus pull-right tooltips" title="Details" data-toggle="collapse" href="#{{lab.key.id()}}"></i>
+					</div>
+					<div id="{{lab.key.id()}}" class="panel-collapse collapse">
 						<div>
-							<a href="{{lab.lab_link()}}" class="labs">{{lab.name}}</a>
-							<i class="fa fa-search-plus pull-right tooltips" title="Details" data-toggle="collapse" href="#{{lab.key.id()}}"></i>
-						</div>
-						<div id="{{lab.key.id()}}" class="panel-collapse collapse">
 							<div class="left-indent-sm">
-							<div>
 								Delete: 
 								<form action="/delete_lab" method="post" class="pull-right">
 									<input type="hidden" name="id" value="{{lab.key.id()}}">
 									<button type="submit" class="close"><span>&times;</span></button>
 								</form>
-								<div style="clear:both;"></div>
-								{% if lab.collaborators[2] %}
-									Collaborators: 
-									<br />
-									<div class="left-indent-sm">
-										{% for collaborator in lab.collaborators %}
-											{% if collaborator != local_user.email_address %}
-												<a href="{{collaborator}}">{name} {{collaborator}}</a>
-												<br />
-											{% endif %}
-										{% endfor %}
-									</div>
-								{% endif %}
 							</div>
+							<div style="clear:both;"></div>
+							<div class="left-indent-sm">
+								Collaborators:
+								<div class="left-indent-sm">
+									{% for collaborator in lab.list_collaborators() %}
+										{% if collaborator.name %}
+											<a href="{{collaborator.profile_link()}}">{{collaborator.name}} {{collaborator.last_name}}</a>
+											<br />
+										{% else %}
+											<a href="mailto:{{collaborator}}" data-toggle="tooltip" data-placement="top" title="Collaborator Not Registered on CooLabs" >{{collaborator}}</a>
+											<br />
+										{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+							<div style="clear:both;">&nbsp;</div>
 						</div>
 					</div>
 				{% endfor %}
