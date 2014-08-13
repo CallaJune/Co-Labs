@@ -31,9 +31,9 @@ html {
 
 .learn-section {
     height: 100%;
+    background-image: url('http://static.simpledesktops.com/uploads/desktops/2011/10/19/Doppler_Effect.png');
     padding-top: 100px;
     text-align: center;
-    background: #eee;
 }
 
 .go-section {
