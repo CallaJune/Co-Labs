@@ -117,11 +117,12 @@ class MainHandler(BaseHandler):
 		if self.user:
 			self.redirect(self.user.profile_link())
 		else:
-			self.render_template('home')
+			params = { "splash" : True }
+			self.render_template('login', params)
 
 class SignupHandler(BaseHandler):
 	def get(self):
-		self.render_template('home')
+		self.render_template('login')
 
 	def post(self):
 		email = self.request.get('email')

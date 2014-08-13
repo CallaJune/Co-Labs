@@ -39,21 +39,24 @@ html {
     height: 100%;
     padding-top: 260px;
     text-align: center;
+<<<<<<< HEAD
     position: relative;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.8);
+=======
+>>>>>>> f09e757c6907fb6b231904430174db86f624b920
 }
 
 .learn-section {
     height: 100%;
     background-image: url('http://i.imgur.com/kajMYj2.png');
-    padding-top: 100px;
+    padding-top: 50px;
     text-align: center;
 }
 
 .go-section {
     height: 100%;
-    padding-top: 150px;
+    padding-top: 50px;
     text-align: center;
     background: #fff;
 }
