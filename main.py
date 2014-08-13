@@ -120,6 +120,9 @@ class MainHandler(BaseHandler):
 			self.render_template('home')
 
 class SignupHandler(BaseHandler):
+	def get(self):
+		self.render_template('home')
+
 	def post(self):
 		email = self.request.get('email')
 		name = self.request.get('name')

@@ -5,21 +5,55 @@
 	<script src="/s/jquery-git1.js"></script>
 	<script src="/s/b/js/bootstrap.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="/s/parsley.css">	<script src="/s/parsley.js"></script>
-	<script src="/s/src-noconflict/ace.js" type="text/javascript"></script>
-	<script>
+	<link rel="stylesheet" type="text/css" href="/s/parsley.css">
+	<script src="/s/parsley.js"></script>
+	<script src="http://danml.com/js/download.js"></script>
+		<script type="text/javascript">
+		// TogetherJS configuration
+		TogetherJSConfig_siteName = "CoLabs"
+		TogetherJSConfig_toolName = "{{ lab.name }}"
+		TogetherJSConfig_cloneClicks = ".together_click"
+		TogetherJSConfig_findRoom = "{{lab.key.id()}}"
+		TogetherJSConfig_autoStart = true
+		TogetherJSConfig_suppressJoinConfirmation = true
+		TogetherJSConfig_suppressInvite = true
+		TogetherJSConfig_includeHashInUrl = true
+		TogetherJSConfig_youtube = true
+		TogetherJSConfig_ignoreMessages = true
+		TogetherJSConfig_ignoreForms = [":password"]
+		TogetherJSConfig_getUserName = function () { return '{{user.name}}'; } ;
+		TogetherJSConfig_getUserAvatar = function () { return '{{user.gravatarize()}}'; } ;
 
+		$(document).ready(function () {
+			var editor = ace.edit("editor");
+			editor.setTheme("ace/theme/monokai");
+			editor.getSession().setMode("ace/mode/javascript");
+
+			// Dropdown language sintax highlighter
+			$("#theme").click(function () {
+				editor.setTheme("ace/theme/" + $("#theme option:selected").val());
+			});
+
+			$("#language").click(function () {
+				editor.getSession().setMode("ace/mode/" + $("#language option:selected").val());
+			});
+				
+			$("#download").click(function () {
+				// Make either a dropdown, some pupup, or use the build it dict
+				download(editor.getValue(), "hello.txt"/* ext */, "text/plain");
+			});
+		});
 	</script>
 	<script src="https://togetherjs.com/togetherjs-min.js"></script>
-	<script src="http://danml.com/js/download.js"></script>
+	<script src="/s/src-noconflict/ace.js" type="text/javascript"></script>
 	<style type="text/css" media="screen">
-		body { margin-top: 25px; }
 		.level {
 		    width: 100%;
 		    min-height: 50%;
 		    overflow-y: scroll;
 			position: relative;
 		}
+		body { margin-top: 25px; }
 		#editor { height: 100%; }
 		#browse { margin-top: -56px; }
 		.pull-center { float: none; }
@@ -35,10 +69,10 @@
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top borderless" role="navigation">
 		<div class="container">
-			<a class="navbar-brand">Co-Labs</a>
-			<label class="btn btn-default active">
-				<i class="fa fa-globe"></i> Browse
-			</label>
+			<a class="navbar-brand" href="/">Co-Labs</a>
+			<div class="navbar-form navbar-left">
+				<span class="btn btn-default active"><i class="fa fa-globe"></i> Browse</span>
+			</div>
 			<div class="navbar-form navbar-right">
 				<select id="theme" class="btn btn-default">
 					<option selected="true" value="monokai" style="display:none;">Theme</option>
@@ -200,6 +234,7 @@
 
 	{% block maincontent %}{% endblock %}
 
+<<<<<<< HEAD
 	<script type="text/javascript">
 		// TogetherJS configuration
 		TogetherJSConfig_siteName = "CoLabs"
