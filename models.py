@@ -16,6 +16,7 @@ class User(webapp2_extras.appengine.auth.models.User):
     self.password = security.generate_password_hash(raw_password, length=12)
   def profile_link(self):
     return "/p/{0}.{1}/{2}".format(self.name, self.last_name, self.key.id())
+
   def gravatarize(self):
     default = ""
     gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(self.email_address.lower()).hexdigest() + "?"
@@ -68,3 +69,13 @@ class Lab(ndb.Model):
   
   def lab_link(self):
     return "/l/{0}".format(self.key.id())
+
+  def list_collaborators(self):
+    users = []
+    for collaborator in self.collaborators:
+      user = User.get_by_auth_id(collaborator)
+      if user:
+        users.append(user)
+      else:
+        users.append('{0}'.format(collaborator))
+    return users
