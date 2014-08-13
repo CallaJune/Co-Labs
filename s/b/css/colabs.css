@@ -37,10 +37,11 @@ html {
 }
 .intro-section {
     height: 100%;
-    background-image: url('http://static.simpledesktops.com/uploads/desktops/2014/06/20/RainbowTiles_Wallpaper.png');
     padding-top: 260px;
     text-align: center;
-    /*background: #fff;*/
+    position: relative;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .learn-section {
@@ -56,3 +57,19 @@ html {
     text-align: center;
     background: #fff;
 }
+.page-scroll {
+    border: 2px white;
+    border-radius: 1em;
+}
+
+#codingXp {
+    background: url('/s/images/coding.gif');
+    background-size: cover;
+    width: 100%;
+    height: inherit;
+    display: block;
+    margin-top: -200px;
+    position: fixed;
+    z-index: -45;
+}
+
