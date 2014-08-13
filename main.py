@@ -117,7 +117,7 @@ class SignupHandler(BaseHandler):
 		if self.user:
 			self.redirect(self.user.profile_link())
 		else:
-			self.render_template('register')
+			self.render_template('login')
 
 	def post(self):
 		email = self.request.get('email')
@@ -267,7 +267,7 @@ class LoginHandler(BaseHandler):
 			'email': email,
 			'failed': failed
 		}
-		self.render_template('register', params)
+		self.render_template('login', params)
 
 class LogoutHandler(BaseHandler):
 	def get(self):
@@ -286,7 +286,6 @@ config = {
 
 # End Authentication?
 
-# what the fuck is this shit doing with kwargs??
 class ProfileHandler(BaseHandler):
 	@user_required
 	def get(self, *args, **kwargs):

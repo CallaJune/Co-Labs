@@ -6,26 +6,26 @@
 			<a class="navbar-brand" href="#" >Co-Labs</a>
 			<div class="col-md-5" id="browseinput">
 				<div class="btn-group" data-toggle="buttons">
-				  <label class="btn  active">
-				    <input type="radio" name="options"  id="browser"checked><i class="fa fa-globe"></i> Browse
-				  </label>
-				  <label class="btn">
-				  	<script src="https://apis.google.com/js/platform.js"></script>
+					<label class="btn btn-default active">
+						<input type="radio" name="options" id="browser"checked><i class="fa fa-globe"></i> Browse
+					</label>
+					<label class="btn">
+						<script src="https://apis.google.com/js/platform.js"></script>
 					<input type="radio" name="options" id="hangout"><div id="placeholder-div2"></div>
-				    <g:hangout render="createhangout"
-				        invites="[{% for collaborator in lab.collaborators %}
-					    	{ id : '{{collaborator}}', invite_type : 'EMAIL' }
-					    	{% if not loop.last%},{% endif %}
-					    {% endfor %}]">
-				    </g:hangout>
-				  </label>
+						<g:hangout render="createhangout"
+								invites="[{% for collaborator in lab.collaborators %}
+								{ id : '{{collaborator}}', invite_type : 'EMAIL' }
+								{% if not loop.last%},{% endif %}
+							{% endfor %}]">
+						</g:hangout>
+					</label>
 				</div>
 			</div>
 			<div class="navbar-form navbar-right">
 				<a href="{{user.profile_link()}}">{{user.email_address}} <i class="fa fa-home"></i></a>
 			</div>
 		</div>
-	</nav>	
+	</nav>
 	<div class='level' id='coolspace'>
 		
 	</div>
@@ -48,4 +48,4 @@
 			$('#coolspace').append(browser);
 		});
 	</script>
-{% endblock %}<!-- Nothing should be bellow here -->
+{% endblock %}
