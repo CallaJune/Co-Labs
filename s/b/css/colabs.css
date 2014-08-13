@@ -22,28 +22,22 @@ html {
 }
 .intro-section {
     height: 100%;
-    padding-top: 150px;
+    background-image: url('http://static.simpledesktops.com/uploads/desktops/2014/06/20/RainbowTiles_Wallpaper.png');
+    padding-top: 200px;
     text-align: center;
-    background: #fff;
+    /*background: #fff;*/
 }
 
-.about-section {
+.learn-section {
     height: 100%;
-    padding-top: 150px;
+    padding-top: 100px;
     text-align: center;
     background: #eee;
 }
 
-.services-section {
+.go-section {
     height: 100%;
     padding-top: 150px;
     text-align: center;
     background: #fff;
-}
-
-.contact-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #eee;
 }
