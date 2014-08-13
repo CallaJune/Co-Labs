@@ -3,13 +3,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Co-Labs</title>
     <link href="s/b/css/bootstrap.css" rel="stylesheet">
-    <script src="s/b/js/jquery.easing.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
     <script src="/s/b/js/jquery-1.11.0.js"></script>
+    <script src="s/b/js/jquery.easing.min.js"></script>
     <script src="/s/b/js/bootstrap.min.js"></script>
     <script src="s/b/js/scrolling-nav.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
     <link href="s/b/css/colabs.css" rel="stylesheet">
     <style type="text/css">
+        #intro, #learn, #join
+        {
+            height: 100%;
+            width: 100%;
+        }
     </style>
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -44,33 +49,22 @@
         </div>
     </nav>
 
-    <section id="intro" class="intro-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Coding. Searching. Collaborating. All in one tab.</h1>
-                    <br><a class="fa fa-angle-double-down fa-5x page-scroll" href="#learn"></a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div id="intro" class="container intro-section">
+        <h1 id="greeting">Coding. Searching. Collaborating. All in one tab.</h1>
+        <br><a class="fa fa-angle-double-down fa-5x btn-circle page-scroll" href="#learn"></a>
+    </div>
 
-    <section id="learn" class="learn-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Learn</h1>
-                    <p>In an impersonal world populated by tab-ridden browsers, Co-Labs provides
-                    a sleek interface </p><p>that allows developers to research and code together, all in one tab.</p>
-		    <img src="s/images/screenshot.png" width=500/>
-                    <br><br><a class="btn btn-primary page-scroll" href="#go">Let's go</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div id="learn" class="container learn-section">
+        <h1>Learn</h1>
+        <p>In an impersonal world populated by tab-ridden browsers, Co-Labs provides
+        a sleek interface </p><p>that allows developers to research and code together, all in one tab.</p>
+        <img src="s/images/screenshot.png" width=500/>
+        <br><br>
+        <a class="fa fa-angle-double-down fa-5x btn-circle page-scroll" href="#join"></a>
+    </div>
 
-    <section id="join" class="go-section">
+    <div id="join" class="go-section">
         {% block maincontent %}{% endblock %}
-    </section>
+    </div>
 </body>
 </html>
