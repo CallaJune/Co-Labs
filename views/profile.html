@@ -30,11 +30,9 @@
 							Collaborators: 
 							<br />
 							<div class="left-indent-sm">
-								{% for collaborator in lab.collaborators[:] %}
-									{% if collaborator != local_user.email_address %}
-										<a href="{{collaborator}}">{name} {{collaborator}}</a>
+								{% for collaborator in lab.collaborators %}
+										<a href="{{collaborator}}">{{collaborator}}</a>
 										<br />
-									{% endif %}
 								{% endfor %}
 							</div>
 						</div>
