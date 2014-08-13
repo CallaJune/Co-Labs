@@ -328,7 +328,8 @@ class NewLabHandler(BaseHandler):
 		lab = Lab(name=name,
 				owner=owner,
 				private=private,
-				collaborators= collaborators.split(", "))
+				collaborators= collaborators.split(","))
+				# do a split after
 		lab.put()
 
 		time.sleep(1)
