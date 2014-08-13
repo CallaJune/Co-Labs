@@ -4,19 +4,13 @@
     <title>Co-Labs</title>
     <link href="s/b/css/bootstrap.css" rel="stylesheet">
     <link href="s/b/css/colabs.css" rel="stylesheet">
-    <!-- <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> -->
-    <!-- <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> -->
-
-    <!-- jQuery Version 1.11.0 -->
     <script src="/s/b/js/jquery-1.11.0.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
     <script src="/s/b/js/bootstrap.min.js"></script>
-
-    <!-- Scrolling Nav JavaScript -->
     <script src="s/b/js/jquery.easing.min.js"></script>
     <script src="s/b/js/scrolling-nav.js"></script>
-
+    <style type="text/css">
+        /*#join*/
+    </style>
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <!-- Navigation -->
@@ -43,16 +37,14 @@
                         <a class="page-scroll" href="#learn">Learn</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#go">Go</a>
+                        <a class="page-scroll" href="#join">Join</a>
                     </li>
                 </ul>
-		<div class="navbar-form navbar-right">
-			<a class="btn btn-primary" href="/login">Login</a>
-		</div>
+        		<div class="navbar-form navbar-right">
+        			<a class="btn btn-primary" href="/login">Login</a>
+        		</div>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
 
     <section id="intro" class="intro-section">
@@ -81,14 +73,8 @@
     </section>
 
 
-    <section id="go" class="go-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <a class="btn btn-primary" href="#go">Sign in/Log in</a>
-                </div>
-            </div>
-        </div>
+    <section id="join" class="go-section">
+        {% block maincontent %}{% endblock %}
     </section>
 </body>
 </html>
