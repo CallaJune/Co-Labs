@@ -21,22 +21,14 @@
 	<body>
 		<nav class="navbar navbar-default navbar-fixed-top borderless" role="navigation">
 			<div class="container">
-					<!-- <a href="/">Home</a> -->
-					<!-- <a href="/authenticated">Secured page</a> (you can see this after login) -->
-					<!-- <a class="navbar-brand" href="#">Profile's List</a> -->
-					<div class="navbar-form navbar-right">
-						{% if not user %}
-							<a href="/login"><button class="btn btn-primary">Login</button></a>
-						{% else %}
-							<!-- Welcome, <span style="background-color: OldLace"> -->
-							<!-- <img src="">{{ user.name }}</span>!   -->
-							<a href="{{ user.profile_link() }}"><button class="btn btn-default"><i class="fa fa-home"></i> Profile</button></a>
-							<a href="/logout"><button class="btn btn-danger">Logout</button></a> 
-							<!-- <h1>Email: {{ user.email_address }}!</h1> -->
-						{% endif %}
-						<!-- <a href="/signup"><button class="btn btn-primary">Sign up</button></a> -->
-						<!-- <a href="/login"><button class="btn btn-default">Login</button></a> -->
-					</div>
+				<div class="navbar-form navbar-right">
+					{% if not user %}
+						<a href="/login"><button class="btn btn-primary">Login</button></a>
+					{% else %}
+						<a href="{{ user.profile_link() }}"><button class="btn btn-default"><i class="fa fa-home"></i> Profile</button></a>
+						<a href="/logout"><button class="btn btn-danger">Logout</button></a> 
+					{% endif %}
+				</div>
 			</div>
 		</nav>
 		<div class="content">

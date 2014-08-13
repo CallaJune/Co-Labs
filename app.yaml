@@ -12,10 +12,6 @@ handlers:
 - url: /s
   static_dir: s
 
-- url: /signup
-  script: main.app
-  secure: always
-
 - url: /login
   script: main.app
   secure: always

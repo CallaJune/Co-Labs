@@ -28,7 +28,7 @@ def user_required(handler):
 	def check_login(self, *args, **kwargs):
 		auth = self.auth
 		if not auth.get_user_by_session():
-			self.redirect(self.uri_for('login'), abort=True)
+			self.redirect(self.uri_for('login'))
 		else:
 			return handler(self, *args, **kwargs)
 
@@ -105,6 +105,13 @@ class BaseHandler(webapp2.RequestHandler):
 				# Save all sessions.
 				self.session_store.save_sessions(self.response)
 
+	def abort(self):
+		NotFoundHandler(self)
+
+class NotFoundHandler(BaseHandler):
+	def get(self):
+		self.render_template('404')
+
 class MainHandler(BaseHandler):
 	def get(self):
 		if self.user:
@@ -114,7 +121,7 @@ class MainHandler(BaseHandler):
 
 class SignupHandler(BaseHandler):
 	def get(self):
-		self.render_template('signup')
+		self.abort()
 
 	def post(self):
 		email = self.request.get('email')
@@ -193,8 +200,7 @@ class VerificationHandler(BaseHandler):
 		if not user:
 			logging.info('Could not find any user with id "%s" signup token "%s"',
 				user_id, signup_token)
-			self.abort(404)
-			# TODO override abort
+			self.abort()
 
 		# store user data in the session
 		self.auth.set_session(self.auth.store.user_to_dict(user), remember=True)
@@ -218,8 +224,7 @@ class VerificationHandler(BaseHandler):
 			self.render_template('resetpassword', params)
 		else:
 			logging.info('verification type not supported')
-			self.abort(404)
-			# TODO override abort
+			self.abort()
 
 class SetPasswordHandler(BaseHandler):
 	@user_required
@@ -280,7 +285,6 @@ config = {
 
 # End Authentication?
 
-# what the fuck is this shit doing with kwargs??
 class ProfileHandler(BaseHandler):
 	@user_required
 	def get(self, *args, **kwargs):
@@ -325,14 +329,13 @@ class NewLabHandler(BaseHandler):
 		else:
 			private = False
 		
-		lab = Lab(name=name,
-				owner=owner,
-				private=private,
-				collaborators= collaborators.split(","))
-				# do a split after
+		lab = Lab(name = name,
+				owner = owner,
+				private = private,
+				collaborators = collaborators.split(","))
 		lab.put()
 
-		time.sleep(1)
+		time.sleep(0.1)
 		self.redirect(self.uri_for('home'))
 
 class LabHandler(BaseHandler):
@@ -353,20 +356,17 @@ class LabHandler(BaseHandler):
 			self.display_message('There is no such lab registered under your name. <a href="/new_lab">Create A New Lab</a>')
 
 class DeleteLabHandler(webapp2.RequestHandler):
-	def get(self):
+	def post(self):
 		lab_id = int(self.request.get('id'))
 		lab = Lab.get_by_id(lab_id)
 		if lab:
 			lab.key.delete()
+			time.sleep(0.1)
 			self.redirect(self.uri_for('home'))
 		else:
 			self.display_message('There is no lab by this id.')
 
 # End labs
-
-class NotFoundHandler(BaseHandler):
-	def get(self):
-		self.render_template('404')
 
 routes = [
 		webapp2.Route('/', MainHandler, name='home'),
@@ -379,14 +379,13 @@ routes = [
 			handler=NewLabHandler, name='newlab'),
 		webapp2.Route('/<type:u|p>/<name:.+>.<last_name:.+>/<user_id:\d+>',
 			handler=ProfileHandler, name='profile'),
+		webapp2.Route('/delete_lab', DeleteLabHandler),
 		webapp2.Route('/password', SetPasswordHandler),
 		webapp2.Route('/login', LoginHandler, name='login'),
 		webapp2.Route('/logout', LogoutHandler, name='logout'),
 		webapp2.Route('/forgot', ForgotPasswordHandler, name='forgot'),
+		webapp2.Route("/profile", MainHandler),
 		("/.*", NotFoundHandler),
 ]
 
 app = webapp2.WSGIApplication(routes, debug=True, config=config)
-
-# What's this for?
-# logging.getLogger().setLevel(logging.DEBUG)
