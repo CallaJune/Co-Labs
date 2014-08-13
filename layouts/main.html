@@ -21,15 +21,16 @@
 	<body>
 		<nav class="navbar navbar-default navbar-fixed-top borderless" role="navigation">
 			<div class="container">
-					<a class="navbar-brand" href="/">CoLabs</a>
-					<div class="navbar-form navbar-right">
-						{% if not user %}
-							<a href="/login"><button class="btn btn-primary">Login</button></a>
-						{% else %}
-							<a href="{{ user.profile_link() }}"><button class="btn btn-default"><i class="fa fa-home"></i> Profile</button></a>
-							<a href="/logout"><button class="btn btn-danger">Logout</button></a> 
-						{% endif %}
-					</div>
+				<!-- Hmmm .... no more profile? or yes? -->
+				<a class="navbar-brand" href="/">CoLabs</a>
+				<div class="navbar-form navbar-right">
+					{% if not user %}
+						<a href="/login"><button class="btn btn-primary">Login</button></a>
+					{% else %}
+						<a href="{{ user.profile_link() }}"><button class="btn btn-default"><i class="fa fa-home"></i> Profile</button></a>
+						<a href="/logout"><button class="btn btn-danger">Logout</button></a> 
+					{% endif %}
+				</div>
 			</div>
 		</nav>
 		<div class="content">
