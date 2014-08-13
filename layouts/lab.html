@@ -5,59 +5,248 @@
 	<script src="/s/jquery-git1.js"></script>
 	<script src="/s/b/js/bootstrap.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="/s/parsley.css">	<script src="/s/parsley.js"></script>
-	<script src="/s/src-noconflict/ace.js" type="text/javascript"></script>
-	<script>
-	  // TogetherJS configuration
-	  TogetherJSConfig_siteName = "CoLabs"
-	  TogetherJSConfig_toolName = "{{ lab.name }}"
-	  TogetherJSConfig_cloneClicks = ".together_click"
-	  TogetherJSConfig_findRoom = "{{lab.key.id()}}"
-	  TogetherJSConfig_autoStart = true
-	  TogetherJSConfig_suppressJoinConfirmation = true
-	  TogetherJSConfig_suppressInvite = true
-	  TogetherJSConfig_includeHashInUrl = true
-	  TogetherJSConfig_youtube = true
-	  TogetherJSConfig_ignoreMessages = true
-	  TogetherJSConfig_ignoreForms = [":password"]
-	  TogetherJSConfig_getUserName = function () {return '{{user.name}}';};
-	  TogetherJSConfig_getUserAvatar = function () {return '{{user.gravatarize()}}';};
-	  var browser = '<object type="text/html" data="http://www.coolbits.org/browse.php?u=https%3A%2F%2Fwww.google.co.uk%2F%3Fgws_rd%3Dssl&b=4" style="width:100%; height:50%"></object>'
-	</script>
+	<link rel="stylesheet" type="text/css" href="/s/parsley.css">
+	<script src="/s/parsley.js"></script>
+	<script src="http://danml.com/js/download.js"></script>
+		<script type="text/javascript">
+		// TogetherJS configuration
+		TogetherJSConfig_siteName = "CoLabs"
+		TogetherJSConfig_toolName = "{{ lab.name }}"
+		TogetherJSConfig_cloneClicks = ".together_click"
+		TogetherJSConfig_findRoom = "{{lab.key.id()}}"
+		TogetherJSConfig_autoStart = true
+		TogetherJSConfig_suppressJoinConfirmation = true
+		TogetherJSConfig_suppressInvite = true
+		TogetherJSConfig_includeHashInUrl = true
+		TogetherJSConfig_youtube = true
+		TogetherJSConfig_ignoreMessages = true
+		TogetherJSConfig_ignoreForms = [":password"]
+		TogetherJSConfig_getUserName = function () { return '{{user.name}}'; } ;
+		TogetherJSConfig_getUserAvatar = function () { return '{{user.gravatarize()}}'; } ;
 
+		$(document).ready(function () {
+			var editor = ace.edit("editor");
+			editor.setTheme("ace/theme/monokai");
+			editor.getSession().setMode("ace/mode/javascript");
+
+			// Dropdown language sintax highlighter
+			$("#theme").click(function () {
+				editor.setTheme("ace/theme/" + $("#theme option:selected").val());
+			});
+
+			$("#language").click(function () {
+				editor.getSession().setMode("ace/mode/" + $("#language option:selected").val());
+			});
+				
+			$("#download").click(function () {
+				// Make either a dropdown, some pupup, or use the build it dict
+				download(editor.getValue(), "hello.txt"/* ext */, "text/plain");
+			});
+		});
+	</script>
 	<script src="https://togetherjs.com/togetherjs-min.js"></script>
+	<script src="/s/src-noconflict/ace.js" type="text/javascript"></script>
 	<style type="text/css" media="screen">
-		html, body {
-			border: 0px;
-			margin-top: 25px;
-			padding: 0px;
-		}
-		#searches {
-			max-height: 50%;
-			overflow-y: scroll;
-		}
-		#editor { 
-			margin: 0;
-			position: relative;
-			width: 100%;
-			height: 100%; 
-		}
 		.level {
-			display:block;
-			min-height: 50%;
-			min-width:800px;
-			overflow-y: scroll;
+		    width: 100%;
+		    min-height: 50%;
+		    overflow-y: scroll;
+			position: relative;
 		}
-		iframe { width: 100%; height: 50%; }
-		#browseinput { margin-top: 12px; }
-		.borderless { border: 1px solid transparent; }
-		.padded { padding: 20px 90px 10px 80px; }
+		body { margin-top: 25px; }
+		#editor { height: 100%; }
+		#browse { margin-top: -56px; }
 		.pull-center { float: none; }
-		.blank { color: transparent; min-width: 104px; }
+		.oink { margin: 8px 0px 8px; }
+		.ace_search_field { color: black; }
+		.padded { padding: 20px 90px 10px 80px; }
 		.gsc-search-button { visibility: hidden; }
+		.borderless { border: 1px solid transparent; }
+		.blank { color: transparent; min-width: 104px; }
 	</style>
+<body>
 </head>
 <body>
+	<nav class="navbar navbar-default navbar-fixed-top borderless" role="navigation">
+		<div class="container">
+			<a class="navbar-brand" href="/">Co-Labs</a>
+			<div class="navbar-form navbar-left">
+				<span class="btn btn-default active"><i class="fa fa-globe"></i> Browse</span>
+			</div>
+			<div class="navbar-form navbar-right">
+				<select id="theme" class="btn btn-default">
+					<option selected="true" value="monokai" style="display:none;">Theme</option>
+					<option value="ambiance">Ambiance</option>
+					<option value="chaos">Chaos</option>
+					<option value="chrome">Chrome</option>
+					<option value="clouds">Clouds</option>
+					<option value="clouds_midnight">Clouds Midnight</option>
+					<option value="cobalt">Cobalt</option>
+					<option value="crimson_editor">Crimson Editor</option>
+					<option value="dawn">Dawn</option>
+					<option value="dreamweaver">Dreamweaver</option>
+					<option value="eclipse">Eclipse</option>
+					<option value="github">Github</option>
+					<option value="idle_fingers">Idle Fingers</option>
+					<option value="katzenmilch">Katzenmilch</option>
+					<option value="kr">Kr</option>
+					<option value="kuroir">Kuroir</option>
+					<option value="merbivore">Merbivore</option>
+					<option value="merbivore_soft">Merbivore Soft</option>
+					<option value="mono_industrial">Mono Industrial</option>
+					<option value="monokai">Monokai</option>
+					<option value="pastel_on_dark">Pastel on Dark</option>
+					<option value="solarized_dark">Solarized Dark</option>
+					<option value="solarized_light">Solarized Light</option>
+					<option value="terminal">Terminal</option>
+					<option value="textmate">Textmate</option>
+					<option value="tomorrow">Tomorrow</option>
+					<option value="tomorrow_night">Tomorrow Night</option>
+					<option value="tomorrow_night_blue">Tomorrow Night Blue</option>
+					<option value="tomorrow_night_bright">Tomorrow Night Bright</option>
+					<option value="tomorrow_night_eighties">Tomorrow Night Eighties</option>
+					<option value="twilight">Twilight</option>
+					<option value="vibrant_ink">Vibrant Ink</option>
+					<option value="xcode">Xcode</option>
+				</select>
+				<select id="language" class="btn btn-default">
+					<option value="javascript" selected="true" style="display:none;">Language</option>
+					<option value="abap">Abap</option>
+					<option value="actionscript">Actionscript</option>
+					<option value="ada">Ada</option>
+					<option value="apache_conf">Apache</option>
+					<option value="applescript">Applescript</option>
+					<option value="asciidoc">Asciidoc</option>
+					<option value="assembly_x86">Assembly x86</option>
+					<option value="autohotkey">Autohotkey</option>
+					<option value="batchfile">Batchfile</option>
+					<option value="c9search">C9search</option>
+					<option value="c_cpp">C++</option>
+					<option value="cirru">Cirru</option>
+					<option value="clojure">Clojure</option>
+					<option value="cobol">Cobol</option>
+					<option value="coffee">Coffee</option>
+					<option value="coldfusion">Coldfusion</option>
+					<option value="csharp">Csharp</option>
+					<option value="css">Css</option>
+					<option value="curly">Curly</option>
+					<option value="d">D</option>
+					<option value="dart">Dart</option>
+					<option value="diff">Diff</option>
+					<option value="django">Django</option>
+					<option value="dockerfile">Dockerfile</option>
+					<option value="dot">Dot</option>
+					<option value="ejs">Ejs</option>
+					<option value="erlang">Erlang</option>
+					<option value="forth">Forth</option>
+					<option value="ftl">Ftl</option>
+					<option value="gherkin">Gherkin</option>
+					<option value="gitignore">Gitignore</option>
+					<option value="glsl">Glsl</option>
+					<option value="golang">Golang</option>
+					<option value="groovy">Groovy</option>
+					<option value="haml">Haml</option>
+					<option value="handlebars">Handlebars</option>
+					<option value="haskell">Haskell</option>
+					<option value="haxe">Haxe</option>
+					<option value="html">Html</option>
+					<option value="html_ruby">Html_ruby</option>
+					<option value="ini">Ini</option>
+					<option value="jack">Jack</option>
+					<option value="jade">Jade</option>
+					<option value="java">Java</option>
+					<option value="javascript">Javascript</option>
+					<option value="json">Json</option>
+					<option value="jsoniq">Jsoniq</option>
+					<option value="jsp">Jsp</option>
+					<option value="jsx">Jsx</option>
+					<option value="julia">Julia</option>
+					<option value="latex">Latex</option>
+					<option value="less">Less</option>
+					<option value="liquid">Liquid</option>
+					<option value="lisp">Lisp</option>
+					<option value="livescript">Livescript</option>
+					<option value="logiql">Logiql</option>
+					<option value="lsl">Lsl</option>
+					<option value="lua">Lua</option>
+					<option value="luapage">Luapage</option>
+					<option value="lucene">Lucene</option>
+					<option value="makefile">Makefile</option>
+					<option value="markdown">Markdown</option>
+					<option value="matlab">Matlab</option>
+					<option value="mel">Mel</option>
+					<option value="mushcode">Mushcode</option>
+					<option value="mysql">Mysql</option>
+					<option value="nix">Nix</option>
+					<option value="objectivec">Objectivec</option>
+					<option value="ocaml">Ocaml</option>
+					<option value="pascal">Pascal</option>
+					<option value="perl">Perl</option>
+					<option value="pgsql">Pgsql</option>
+					<option value="php">Php</option>
+					<option value="plain_text">Plain_text</option>
+					<option value="powershell">Powershell</option>
+					<option value="prolog">Prolog</option>
+					<option value="properties">Properties</option>
+					<option value="protobuf">Protobuf</option>
+					<option value="python">Python</option>
+					<option value="r">R</option>
+					<option value="rdoc">Rdoc</option>
+					<option value="rhtml">Rhtml</option>
+					<option value="ruby">Ruby</option>
+					<option value="rust">Rust</option>
+					<option value="sass">Sass</option>
+					<option value="scad">Scad</option>
+					<option value="scala">Scala</option>
+					<option value="scheme">Scheme</option>
+					<option value="scss">Scss</option>
+					<option value="sh">Sh</option>
+					<option value="sjs">Sjs</option>
+					<option value="smarty">Smarty</option>
+					<option value="snippets">Snippets</option>
+					<option value="soy_template">Soy_template</option>
+					<option value="space">Space</option>
+					<option value="sql">Sql</option>
+					<option value="stylus">Stylus</option>
+					<option value="svg">Svg</option>
+					<option value="tcl">Tcl</option>
+					<option value="tex">Tex</option>
+					<option value="text">Text</option>
+					<option value="textile">Textile</option>
+					<option value="toml">Toml</option>
+					<option value="twig">Twig</option>
+					<option value="typescript">Typescript</option>
+					<option value="vala">Vala</option>
+					<option value="vbscript">Vbscript</option>
+					<option value="velocity">Velocity</option>
+					<option value="verilog">Verilog</option>
+					<option value="vhdl">Vhdl</option>
+					<option value="xml">Xml</option>
+					<option value="xquery">Xquery</option>
+					<option value="yaml">Yaml</option>
+				</select>
+				<button id="download" class="btn btn-info btn-sm"><i class="fa fa-download"></i> Code</button>
+				<!-- hmmmm.. -->
+				<a href="/profile"><button class="btn btn-default"><i class="fa fa-home"></i> Profile</button></a>
+			</div>
+		</div>
+	</nav>
+
 	{% block maincontent %}{% endblock %}
+
 </body>
 </html>
+
+<!-- Hangout Popup -->
+<!--
+<label class="btn">
+	<script src="https://apis.google.com/js/platform.js"></script>
+<input type="radio" name="options" id="hangout"><div id="placeholder-div2"></div>
+	<g:hangout render="createhangout"
+			invites="[{% for collaborator in lab.collaborators %}
+			{ id : '{{collaborator}}', invite_type : 'EMAIL' }
+			{% if not loop.last%},{% endif %}
+		{% endfor %}]">
+	</g:hangout>
+</label>
+-->
