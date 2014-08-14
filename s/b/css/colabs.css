@@ -23,6 +23,12 @@ body {
     }
 }
 
+.btn-circle:hover 
+{
+    color: white;
+    border: 2px solid white;
+}
+
 .btn-circle {
     width: 60px;
     height: 70px;
@@ -36,25 +42,14 @@ body {
     transition: background .3s ease-in-out;
 }
 
-.btn-circle:hover 
-{
-    color: white;
-    border: 2px solid white;
-}
-
 .intro-section {
-    height: 60%;
-    background-repeat: no-repeat;
-    background-image: url("/s/images/coding.gif");
-    background-size: 100%;
-    padding-top: 210px;
+    height: 100%;
+    padding-top: 260px;
     text-align: center;
-    vertical-align: center;
-    position: relative;
+    position: absolute;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.8);
 }
-
 .learn-section {
     height: 100%;
     background-image: url('http://static.simpledesktops.com/uploads/desktops/2014/06/20/RainbowTiles_Wallpaper.png');
@@ -71,12 +66,8 @@ body {
 
 #codingXp {
     background: url('/s/images/coding.gif');
+    background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: inherit;
     display: block;
-    margin-top: -200px;
-    position: fixed;
-    z-index: -45;
 }
-
