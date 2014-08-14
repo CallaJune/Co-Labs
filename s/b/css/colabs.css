@@ -9,11 +9,6 @@ body {
     margin-top: 71px
 }
 
-#greeting
-{
-    color: white;
-}
-
 @media(min-width:767px) {
     .navbar {
         padding: 10px 0;
@@ -28,29 +23,30 @@ body {
     }
 }
 
-.btn-circle:hover 
-{
-    color: white;
-}
-
 .btn-circle {
-    width: 70px;
+    width: 60px;
     height: 70px;
+    color: white;
+    font-size: 40px;
     margin-top: 15px;
     padding: 7px 16px;
-    border: 2px solid #fff;
-    border-radius: 35px;
-    font-size: 40px;
-    color: white;
-    background: 0 0;
+    border-radius: 35px 35px 35px 35px;
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
     transition: background .3s ease-in-out;
 }
 
+.btn-circle:hover 
+{
+    color: white;
+    border: 2px solid white;
+}
+
 .intro-section {
     height: 60%;
-    background-image: url('http://static.simpledesktops.com/uploads/desktops/2014/06/20/RainbowTiles_Wallpaper.png');
+    background-repeat: no-repeat;
+    background-image: url("/s/images/coding.gif");
+    background-size: 100%;
     padding-top: 210px;
     text-align: center;
     vertical-align: center;
@@ -61,7 +57,7 @@ body {
 
 .learn-section {
     height: 100%;
-    background-image: url('http://i.imgur.com/kajMYj2.png');
+    background-image: url('http://static.simpledesktops.com/uploads/desktops/2014/06/20/RainbowTiles_Wallpaper.png');
     padding-top: 50px;
     text-align: center;
 }
@@ -71,10 +67,6 @@ body {
     padding-top: 50px;
     text-align: center;
     background: #fff;
-}
-.page-scroll {
-    border: 2px white;
-    border-radius: 1em;
 }
 
 #codingXp {

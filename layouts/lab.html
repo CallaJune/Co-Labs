@@ -70,9 +70,6 @@
 	<nav class="navbar navbar-default navbar-fixed-top borderless" role="navigation">
 		<div class="container">
 			<a class="navbar-brand" href="/">Co-Labs</a>
-			<div class="navbar-form navbar-left">
-				<span class="btn btn-default active"><i class="fa fa-globe"></i> Browse</span>
-			</div>
 			<div class="navbar-form navbar-right">
 				<select id="theme" class="btn btn-default">
 					<option selected="true" value="monokai" style="display:none;">Theme</option>
@@ -233,44 +230,7 @@
 	</nav>
 
 	{% block maincontent %}{% endblock %}
-
-<<<<<<< HEAD
-	<script type="text/javascript">
-		// TogetherJS configuration
-		TogetherJSConfig_siteName = "CoLabs"
-		TogetherJSConfig_toolName = "{{ lab.name }}"
-		TogetherJSConfig_cloneClicks = ".together_click"
-		TogetherJSConfig_findRoom = "{{lab.key.id()}}"
-		TogetherJSConfig_autoStart = true
-		TogetherJSConfig_suppressJoinConfirmation = true
-		TogetherJSConfig_suppressInvite = true
-		TogetherJSConfig_includeHashInUrl = true
-		TogetherJSConfig_youtube = true
-		TogetherJSConfig_ignoreMessages = true
-		TogetherJSConfig_ignoreForms = [":password"]
-		TogetherJSConfig_getUserName = function () {return '{{user.name}}';};
-		TogetherJSConfig_getUserAvatar = function () {return '{{user.gravatarize()}}';};
-
-		$(document).ready(function () {
-			var editor = ace.edit("editor");
-			editor.setTheme("ace/theme/monokai");
-			editor.getSession().setMode("ace/mode/javascript");
-
-			// Dropdown language sintax highlighter
-			$("#theme").click(function () {
-				editor.setTheme("ace/theme/" + $("#theme option:selected").val());
-			});
-
-			$("#language").click(function () {
-				editor.getSession().setMode("ace/mode/" + $("#language option:selected").val());
-			});
-				
-			$("#download").click(function () {
-				// Make either a dropdown, some pupup, or use the build it dict
-				download(editor.getValue(), "hello.txt"/* ext */, "text/plain");
-			});
-		});
-	</script>
+	
 </body>
 </html>
 
