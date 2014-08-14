@@ -22,11 +22,20 @@
 		TogetherJSConfig_ignoreForms = [":password"]
 		TogetherJSConfig_getUserName = function () { return '{{user.name}}'; } ;
 		TogetherJSConfig_getUserAvatar = function () { return '{{user.gravatarize()}}'; } ;
-
+		var spotifyUri = ''
+		function build_spotify_embed(uri) {
+			return '<iframe src="https://embed.spotify.com/?uri=' + uri +'" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>'
+		}
 		$(document).ready(function () {
+
+			// Only show the browser option initially: Consider google search
+			$("#youtubeContainer").hide();
+			$("#spotifyContainer").hide();
+			$("#previewContainer").hide();
+
 			var editor = ace.edit("editor");
 			editor.setTheme("ace/theme/monokai");
-			editor.getSession().setMode("ace/mode/javascript");
+			editor.getSession().setMode("ace/mode/html");
 
 			// Dropdown language sintax highlighter
 			$("#theme").click(function () {
@@ -40,6 +49,41 @@
 			$("#download").click(function () {
 				// Make either a dropdown, some pupup, or use the build it dict
 				download(editor.getValue(), "hello.txt"/* ext */, "text/plain");
+			});
+			$("#browseBtn").click(function () {
+				$("#browse").show();
+				$("#youtubeContainer").hide();
+				$("#spotifyContainer").hide();
+				$("#previewContainer").hide();
+			});
+			$("#youtubeBtn").click(function () {
+				$("#browse").hide();
+				$("#youtubeContainer").show();
+				$("#spotifyContainer").hide();
+				$("#previewContainer").hide();
+			});
+			if(spotifyUri != ''){
+				$("input#spotifyuribox").val('');
+				$("#spotifyModal div.modal-body").append(build_spotify_embed(spotifyUri));
+			};
+			$("#spotifyBtn").click(function () {
+				$("#browse").hide();
+				$("#youtubeContainer").hide();
+				$("#spotifyContainer").show();
+				$("#previewContainer").hide();
+			});
+			$("#spotifyloader").click(function () {
+				spotifyUri = $("input#spotifyuribox").val();
+				$("input#spotifyuribox").val('');
+				$("#spotifyContainer div.spot").append(build_spotify_embed(spotifyUri));
+			});
+			$("#previewBtn").click(function () {
+				$("#browse").hide();
+				$("#youtubeContainer").hide();
+				$("#spotifyContainer").hide();
+				$("#previewContainer").empty();
+				$("#previewContainer").append(editor.getValue());
+				$("#previewContainer").show();
 			});
 		});
 	</script>
@@ -55,6 +99,7 @@
 		}
 		body { margin-top: 25px; }
 		#browse { height: 60%; margin-top: -56px; }
+		.is_nebular{ margin-top: 56px;}
 		#editor { height: 100%; }
 		.pull-center { float: none; }
 		.ace_search_field { color: black; }
@@ -70,7 +115,7 @@
 		<div class="container">
 			<a class="navbar-brand" href="/">CoLabs</a>
 			<div class="navbar-form navbar-right">
-				<select id="theme" class="btn btn-default">
+				<select id="theme" class="btn btn-default together_click">
 					<option selected="true" value="monokai" style="display:none;">Theme</option>
 					<option value="ambiance">Ambiance</option>
 					<option value="chaos">Chaos</option>
@@ -105,7 +150,7 @@
 					<option value="vibrant_ink">Vibrant Ink</option>
 					<option value="xcode">Xcode</option>
 				</select>
-				<select id="language" class="btn btn-default">
+				<select id="language" class="btn btn-default together_click">
 					<option value="javascript" selected="true" style="display:none;">Language</option>
 					<option value="abap">Abap</option>
 					<option value="actionscript">Actionscript</option>
@@ -222,21 +267,54 @@
 					<option value="yaml">Yaml</option>
 				</select>
 				<button id="download" class="btn btn-info btn-sm"><i class="fa fa-download"></i> Code</button>
+				<span class="dropdown">
+					<a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
+					<button class="btn btn-default">Tools <i class="fa fa-gear"></i></button></a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li role="presentation" id="browseBtn"><a role="menuitem" tabindex="-1" ><i class="fa fa-globe"></i> Browse</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation" id="youtubeBtn"><a role="menuitem" tabindex="-1" ><i class="fa fa-youtube"></i> Youtube</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation" id="spotifyBtn"><a role="menuitem" tabindex="-1" ><i class="fa fa-spotify"></i> Spotify</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation" id="previewBtn"><a role="menuitem" tabindex="-1" ><i class="fa fa-eye"></i> Peview</a></li>
+					</ul>
+				</span>
 				<a href="/profile"><button class="btn btn-default"><i class="fa fa-home"></i> Profile</button></a>
 			</div>
 		</div>
 	</nav>
+	<div id="nebula">
+		<object class="level" id="browse" type="text/html" data="http://www.coolbits.org/browse.php?u=https%3A%2F%2Fwww.google.com.au%2F%3Fgws_rd%3Dssl&amp;amp;b=4"></object>
 
-	<object class="level" id="browse" type="text/html" data="http://www.coolbits.org/browse.php?u=https%3A%2F%2Fwww.google.com.au%2F%3Fgws_rd%3Dssl&amp;amp;b=4"></object>
+		<object class="level is_nebular" id="youtubeContainer" type="text/html" data="/youtube"></object>
+		<div  class="level is_nebular" id="spotifyContainer">
+			 <h4 class="modal-title" id="myModalLabel">Spotify Uri:<input class="together_click" id='spotifyuribox'><button type="button" class="btn btn-primary together_click" id="spotifyloader" >Share</button></h4>
+			<div class="spot">
+			</div>
+		</div>
+		<div class="level is_nebular" id="previewContainer" ></div>
+	</div>
 
 	{# User's Code will go here #}
-	<div class='level' id="editor">// Insert code here
-		function foo(items) {
-			var i;
-			for (i = 0; i &lt; items.length; i++) {
-				alert("4NRs rocks! " + items[i]);
-			}
+	<div class='level' id="editor">
+&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html&#x3E;
+&#x3C;head&#x3E;
+	&#x3C;title&#x3E;Demo&#x3C;/title&#x3E;
+	&#x3C;script&#x3E;
+		function foo(e) {
+			alert(&#x22;Hello world from 4NRs! &#x22;);
 		}
+	&#x3C;/script&#x3E;
+&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+	The content of the document......
+	&#x3C;script&#x3E;
+		foo();
+	&#x3C;/script&#x3E;
+&#x3C;/body&#x3E;
+&#x3C;/html&#x3E;
 	</div>
 	
 </body>

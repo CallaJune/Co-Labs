@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/s/b/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+<style>
+
+.video .video-detail {
+	display: none;
+	margin: 1em;
+	float: right;
+	font-size: 20pt;
+	color: rgba(40, 47, 218, 0.79);
+	border: 1em solid rgb(48, 116, 102);
+	border-radius: 1em;
+	background: rgba(197, 195, 195, 0.3);
+
+}
+.video:hover .video-detail {
+	display: initial;
+
+}
+li {
+	list-style: none;
+	display: block;
+}
+</style>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+<script> 
+
+
+	var currentList = [];
+	function AddVideo(video) {
+
+	 if ($.inArray(video.id.videoId, currentList) == -1){
+	 	 console.log("Adding Video");
+		 $("#videos").prepend("<li class='video'><iframe width='560' height='315' src='https://www.youtube.com/embed/" + video.id.videoId + "' frameborder='0' allowfullscreen></iframe>" +"</li>");
+		 currentList.push(video.id.videoId);
+	  };
+	
+	};
+
+	function AddAllVideos(videos) {
+	  for (i in videos) {
+	    AddVideo(videos[i]);
+	  }
+	};
+	function DisplayVideos(youtubeVideos) {
+	   AddAllVideos(youtubeVideos.items);
+	};
+
+	function populate() {
+		var youtube = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDX4rzJP5mpZbeY9_lDhJkNMOR4n3cjKRY";
+	 	var params = { "q": $("#searchbox").val(), "orderby": "relevance", "maxResults": "20"};
+	 	$.getJSON(youtube, params, DisplayVideos);
+	}
+
+	function clean() {
+		$("#videos").empty();
+	}
+
+	var Main = function() {
+		$('#loader').click( function() {populate();});
+		$('#cleaner').click( function() {clean();});
+	}
+  $(document).ready(Main);
+</script>
+
+</head>
+<body>
+	<input id='searchbox'><button type="button" class="btn btn-primary" id="loader" >Search</button><button type="button" class="btn btn-default" id="cleaner">Clear</button>
+    <ul id="videos"></ul>
+</body>
+</html>
