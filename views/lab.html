@@ -22,10 +22,6 @@
 		TogetherJSConfig_ignoreForms = [":password"]
 		TogetherJSConfig_getUserName = function () { return '{{user.name}}'; } ;
 		TogetherJSConfig_getUserAvatar = function () { return '{{user.gravatarize()}}'; } ;
-		var spotifyUri = ''
-		function build_spotify_embed(uri) {
-			return '<iframe src="https://embed.spotify.com/?uri=' + uri +'" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>'
-		}
 		$(document).ready(function () {
 
 			// Only show the browser option initially: Consider google search
@@ -256,7 +252,7 @@
 		</div>
 	</nav>
 	<div id="nebula">
-		<object class="level" id="browse" type="text/html" data="http://www.coolbits.org/browse.php?u=https%3A%2F%2Fwww.google.com.au%2F%3Fgws_rd%3Dssl&amp;amp;b=4"></object>
+		<object class="level" id="browse" type="text/html" data="http://www.coolbits.org/browse.php?u=https%3A%2F%2Fwww.google.com.au%2F%3Fgws_rd%3Dsslamp;b=4"></object>
 
 		<div class="level is_nebular" id="previewContainer" ></div>
 	</div>
@@ -269,7 +265,7 @@
 	&#x3C;title&#x3E;Demo&#x3C;/title&#x3E;
 	&#x3C;script&#x3E;
 		function foo(e) {
-			console.log(&#x22;Hello world from 4NRs! &#x22;);
+			console.log(&#x22;Hello, universe! &#x22;);
 		}
 	&#x3C;/script&#x3E;
 &#x3C;/head&#x3E;
