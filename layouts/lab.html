@@ -24,6 +24,8 @@
 		TogetherJSConfig_getUserName = function () { return '{{user.name}}'; } ;
 		TogetherJSConfig_getUserAvatar = function () { return '{{user.gravatarize()}}'; } ;
 
+		var internet =	'<object class="level" id="browse" type="text/html" data="http://www.coolbits.org/browse.php?u=https%3A%2F%2Fwww.google.com.au%2F%3Fgws_rd%3Dssl&amp;amp;b=4" style="width:100%; height:50%"></object>'
+
 		$(document).ready(function () {
 			var editor = ace.edit("editor");
 			editor.setTheme("ace/theme/monokai");
@@ -42,6 +44,8 @@
 				// Make either a dropdown, some pupup, or use the build it dict
 				download(editor.getValue(), "hello.txt"/* ext */, "text/plain");
 			});
+
+			$("#browse").append(internet);
 		});
 	</script>
 	<script src="https://togetherjs.com/togetherjs-min.js"></script>
@@ -228,13 +232,23 @@
 		</div>
 	</nav>
 
-	{% block maincontent %}{% endblock %}
+	<div id="browse">
+	</div>
+	{# User's Code will go here #}
+	<div class='level' id="editor">// Insert code here
+		function foo(items) {
+			var i;
+			for (i = 0; i &lt; items.length; i++) {
+				alert("4NRs rocks! " + items[i]);
+			}
+		}
+	</div>
 	
 </body>
 </html>
 
-<!-- Hangout Popup -->
-<!--
+{# <!-- Hangout Popup --> #}
+{# <!--
 <label class="btn">
 	<script src="https://apis.google.com/js/platform.js"></script>
 <input type="radio" name="options" id="hangout"><div id="placeholder-div2"></div>
@@ -245,4 +259,4 @@
 		{% endfor %}]">
 	</g:hangout>
 </label>
--->
+--> #}

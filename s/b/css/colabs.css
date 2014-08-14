@@ -53,7 +53,7 @@ body {
     height: 120%;
     padding-top: 50px;
     text-align: center;
-    background: linear-gradient(45deg, #020031 0%,#6d3353 100%);
+    background: linear-gradient(45deg, #020031 0%,#6d3353 100%);D
 }
 
 #aboutus
@@ -64,7 +64,6 @@ body {
     padding-top: 50px;
     text-align: center;
     background-repeat: no-repeat;
-    background-size: 50%;
     background: url("/s/images/seattle.jpg");  
 }
 

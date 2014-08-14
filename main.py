@@ -352,7 +352,7 @@ class LabHandler(BaseHandler):
 				'lab': lab
 			}
 			lab.put()
-			self.render_template('workspace', params)
+			self.render_template('lab', params)
 		else:
 			params = {
 				'lab_id': lab_id
