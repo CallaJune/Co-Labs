@@ -1,0 +1,83 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin-top: 71px
+}
+
+@media(min-width:767px) {
+    .navbar {
+        padding: 10px 0;
+        opacity: 0.8;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+    }
+
+    .top-nav-collapse {
+        padding: 0;
+    }
+}
+
+.btn-circle:hover 
+{
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    color: white;
+    font-size: 40px;
+    margin-top: 15px;
+    padding: 7px 16px;
+    border-radius: 35px 35px 35px 35px;
+}
+
+.intro-section {
+    height: 100%;
+    padding-top: 260px;
+    text-align: center;
+    position: absolute;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.learn-section {
+    color: white;
+    height: 120%;
+    padding-top: 50px;
+    text-align: center;
+    background: linear-gradient(45deg, #020031 0%,#6d3353 100%);D
+}
+
+#aboutus
+{
+    position: relative;
+    color: white;
+    height: 110%;    
+    padding-top: 50px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background: url("/s/images/seattle.jpg");  
+}
+
+.go-section {
+    height: 100%;
+    padding-top: 50px;
+    text-align: center;
+    background: #fff;
+}
+
+#codingXp {
+    background: url('/s/images/coding.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    display: block;
+}
