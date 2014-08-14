@@ -59,12 +59,11 @@ body {
 #aboutus
 {
     position: relative;
-    color: white;
     height: 110%;    
     padding-top: 50px;
     text-align: center;
     background-repeat: no-repeat;
-    background: url("/s/images/seattle.jpg");  
+    background: #fff;
 }
 
 .go-section {

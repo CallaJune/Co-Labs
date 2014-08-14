@@ -54,10 +54,10 @@
                         <a class="page-scroll" href="#learn">Learn</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#aboutus">About Us</a>
+                        <a class="page-scroll" href="#join">Join</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#join">Join</a>
+                        <a class="page-scroll" href="#aboutus">About Us</a>
                     </li>
                 </ul>
         		<div class="navbar-form navbar-right">
@@ -79,7 +79,11 @@
         a sleek interface </p><p>that allows developers to research and code together, all in one tab.</p>
         <img src="s/images/screenshot.png" width="500"/>
         <br><br>
-        <a class="btn-circle page-scroll fa fa-angle-double-down animated" href="#aboutus"></a>
+        <a class="btn-circle page-scroll fa fa-angle-double-down animated" href="#join"></a>
+    </div>
+
+    <div id="join" class="go-section">
+        {% block maincontent %}{% endblock %}
     </div>
 
     <div id="aboutus" class="container">
@@ -90,26 +94,21 @@
                 <th class="text-center">
                     <img class="circle" src="s/images/marcial.png" />
                     <h2 class="marginless">Marcial</h2>
-                    <div class="text-warning">Designer</div>
+                    <div>Designer</div>
                 </th>
-                <th class="text-center" style="color:white;">
+                <th class="text-center">
                     <img class="circle" src="s/images/calla.jpg" />
                     <h2 class="marginless">Calla</h2>
-                    <div class="text-warning" style="color:white;">Frontend Engineer</div>                    
+                    <div>Frontend Engineer</div>                    
                 </th>
                 <th class="text-center">
                     <img class="circle" src="s/images/wilfred.png" />
                     <h2 class="marginless">Wilfried</h2>
-                    <div class="text-warning">Backend Engineer</div>
+                    <div>Backend Engineer</div>
                 </th>
                 </tr>
             </tbody>
         </table>
-        <a class="btn-circle page-scroll fa fa-angle-double-down animated" href="#join"></a>
-    </div>
-
-    <div id="join" class="go-section">
-        {% block maincontent %}{% endblock %}
     </div>
 </body>
 </html>
