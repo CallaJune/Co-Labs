@@ -14,11 +14,9 @@ handlers:
 
 - url: /login
   script: main.app
-  secure: always
 
 - url: /forgot
   script: main.app
-  secure: always
 
 - url: .*
   script: main.app
