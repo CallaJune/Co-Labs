@@ -392,4 +392,4 @@ routes = [
 		("/.*", NotFoundHandler),
 ]
 
-app = webapp2.WSGIApplication(routes, debug=True, config=config)
+app = webapp2.WSGIApplication(routes, debug=False, config=config)

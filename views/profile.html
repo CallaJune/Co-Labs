@@ -4,16 +4,17 @@
 	<style type="text/css">
 		.rigid { width: 330px; }
 		.box { height: initial }
-		.right-indent-lg { margin-right: 100px; }
-		.left-indent-lg { margin-left: 100px; }
-		.left-indent-sm { margin-left: 10px; }
 		.labs { font-size: large; }
+		.left-indent-sm { margin-left: 10px; }
+		.left-indent-lg { margin-left: 100px; }
 		.close:hover { opacity: 1; color: red; }
+		.right-indent-lg { margin-right: 100px; }
+		.clear { clear: both; height: 3px; display: table-caption; }
 	</style>
 
 	<div class="container">
 		<h2 class="text-right">
-			<img class="circle gravatar" src="{{local_user.gravatarize()}}">
+			<span title="Your Gravatar" class="tooltips"><img class="circle gravatar" src="{{local_user.gravatarize()}}"></span>
 			{{local_user.name}} {{local_user.last_name}}
 		</h2>
 		<br/>
@@ -35,7 +36,7 @@
 									<button type="submit" class="close"><span>&times;</span></button>
 								</form>
 							</div>
-							<div style="clear:both;"></div>
+							<div class="clear"></div>
 							<div class="left-indent-sm">
 								Collaborators:
 								<div class="left-indent-sm">
@@ -50,7 +51,7 @@
 									{% endfor %}
 								</div>
 							</div>
-							<div style="clear:both;">&nbsp;</div>
+							<div class="clear"></div>
 						</div>
 					</div>
 				{% endfor %}

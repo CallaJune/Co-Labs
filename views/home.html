@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Co-Labs</title>
+    <title>CoLabs</title>
     <link href="s/b/css/bootstrap.css" rel="stylesheet">
     <script src="/s/b/js/jquery-1.11.0.js"></script>
     <script src="s/b/js/jquery.easing.min.js"></script>
@@ -10,10 +10,31 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
     <link href="s/b/css/colabs.css" rel="stylesheet">
     <style type="text/css">
-        #intro, #learn, #join
+        #intro, #learn, #join, #aboutus
         {
             height: 100%;
             width: 100%;
+        }
+        .circle 
+        { 
+            width: 150px;
+            height: 150px;
+            border: 7px solid #fff;
+            border-radius: 200px 200px 200px 200px;
+            -moz-border-radius: 200px 200px 200px 200px;
+            -webkit-border-radius: 200px 200px 200px 200px;
+        }
+        .center
+        {
+            width: 80%;
+            height: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .marginless
+        {
+            margin-bottom: 0px
         }
     </style>
 </head>
@@ -22,7 +43,7 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header page-scroll">
-                <a class="navbar-brand page-scroll" href="#page-top">Co-Labs</a>
+                <a class="navbar-brand page-scroll" href="#page-top">CoLabs</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
@@ -31,6 +52,9 @@
                     </li>
                     <li>
                         <a class="page-scroll" href="#learn">Learn</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#aboutus">About Us</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#join">Join</a>
@@ -46,17 +70,44 @@
     <div id="intro" class="container intro-section">
         <h1 id="greeting">Coding. Searching. Collaborating. All in one tab.</h1>
         <br>
-        <a class="btn-circle page-scroll fa fa-angle-double-down fa-4x" href="#learn"></a>
+        <a class="btn-circle page-scroll fa fa-angle-double-down animated" href="#learn"></a>
     </div>
-    <div  class="container learn-section" id="codingXp"></div>
+    <div id="codingXp" class="container learn-section"></div>
     <div id="learn" class="container learn-section">
         <h1>Learn</h1>
-        <p>In an impersonal world populated by tab-ridden browsers, Co-Labs provides
+        <p>In an impersonal world populated by tab-ridden browsers, CoLabs provides
         a sleek interface </p><p>that allows developers to research and code together, all in one tab.</p>
         <img src="s/images/screenshot.png" width="500"/>
         <br><br>
-        <a class="btn-circle page-scroll fa fa-angle-double-down fa-5x" href="#join"></a>
+        <a class="btn-circle page-scroll fa fa-angle-double-down animated" href="#aboutus"></a>
     </div>
+
+    <div id="aboutus" class="container">
+        <h1>About Us</h1>
+        <br />
+        <table class="center">
+            <tbody>
+                <th class="text-center">
+                    <img class="circle" src="s/images/marcial.png" />
+                    <h2 class="marginless">Marcial</h2>
+                    <div class="text-warning">Designer</div>
+                </th>
+                <th class="text-center" style="color:white;">
+                    <img class="circle" src="s/images/calla.jpg" />
+                    <h2 class="marginless">Calla</h2>
+                    <div class="text-warning" style="color:white;">Frontend Engineer</div>                    
+                </th>
+                <th class="text-center">
+                    <img class="circle" src="s/images/wilfred.png" />
+                    <h2 class="marginless">Wilfred</h2>
+                    <div class="text-warning">Backend Engineer</div>
+                </th>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn-circle page-scroll fa fa-angle-double-down animated" href="#join"></a>
+    </div>
+
     <div id="join" class="go-section">
         {% block maincontent %}{% endblock %}
     </div>

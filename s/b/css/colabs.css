@@ -30,16 +30,13 @@ body {
 }
 
 .btn-circle {
-    width: 60px;
+    width: 70px;
     height: 70px;
     color: white;
     font-size: 40px;
     margin-top: 15px;
     padding: 7px 16px;
     border-radius: 35px 35px 35px 35px;
-    -webkit-transition: background .3s ease-in-out;
-    -moz-transition: background .3s ease-in-out;
-    transition: background .3s ease-in-out;
 }
 
 .intro-section {
@@ -50,11 +47,25 @@ body {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.8);
 }
+
 .learn-section {
-    height: 100%;
-    background-image: url('http://static.simpledesktops.com/uploads/desktops/2014/06/20/RainbowTiles_Wallpaper.png');
+    color: white;
+    height: 120%;
     padding-top: 50px;
     text-align: center;
+    background: linear-gradient(45deg, #020031 0%,#6d3353 100%);
+}
+
+#aboutus
+{
+    position: relative;
+    color: white;
+    height: 110%;    
+    padding-top: 50px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background: url("/s/images/seattle.jpg");  
 }
 
 .go-section {
