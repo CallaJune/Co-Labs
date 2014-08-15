@@ -305,7 +305,7 @@ class ProfileHandler(BaseHandler):
 				if local_user.key.id() == user.key.id():
 					labs = query.filter(Lab.collaborators.IN([local_user.email_address])).fetch()
 				else:
-					labs = query.filter(Lab.collaborators.IN([local_user.email_address]) and Lab.private == False).fetch()
+					labs = query.filter(Lab.collaborators.IN([local_user.email_address, user.email_address]) and Lab.private == False).fetch()
 				params = {
 				'labs': labs,
 				'local_user': local_user
@@ -347,17 +347,20 @@ class LabHandler(BaseHandler):
 	def get(self, *args, **kwargs):
 		lab_id = kwargs['lab_id']
 		lab = Lab.get_by_id(int(lab_id))
-		if lab:
-			params = {
-				'lab': lab
-			}
-			lab.put()
-			self.render_template('lab', params)
-		else:
-			params = {
-				'lab_id': lab_id
-			}
-			self.display_message('There is no such lab registered under your name. <a href="/new_lab">Create A New Lab</a>')
+		if self.user.email_address in lab.collaborators:
+				if lab:
+					params = {
+						'lab': lab
+					}
+					lab.put()
+					self.render_template('lab', params)
+				else:
+					params = {
+						'lab_id': lab_id
+					}
+					self.display_message('There is no such lab registered under your name. <a href="/new_lab">Create A New Lab</a>')
+		else: 
+			self.redirect(self.uri_for('home'))
 
 class DeleteLabHandler(webapp2.RequestHandler):
 	def post(self):
