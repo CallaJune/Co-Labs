@@ -19,12 +19,12 @@
 	
 		{% if not_found %}
 			<p><div class="error">				
-		    	<strong>Not found!</strong> We could not found any user with the given username. 
+		    	<strong>Not found!</strong> We could not found any user with the given email. 
 			</div></p>
 		{% endif %} 
 	
 		<form class="form" action= "/forgot" method="POST"  role="form" type="text" data-parsley-validate>
-			<input type="text" value="{{ username }}" name="username" class="form-control rigid text-center" required/>
+			<input type="text" value="{{ email }}" name="email" class="form-control rigid text-center" required/>
 			<br />
 			<input type="submit" value="Send password reset link" class="btn btn-success rigid" />
 		</form>

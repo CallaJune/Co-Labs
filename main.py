@@ -2,6 +2,7 @@ from webapp2_extras.auth import InvalidPasswordError
 from webapp2_extras.auth import InvalidAuthIdError
 
 from google.appengine.ext import ndb
+from google.appengine.api import mail
 
 from webapp2_extras import sessions
 from webapp2_extras import auth
@@ -108,6 +109,14 @@ class BaseHandler(webapp2.RequestHandler):
 	def abort(self):
 		NotFoundHandler(self)
 
+	def send_mail(self, msg, msubject, email):
+		message = mail.EmailMessage(sender="CoLabs Support <wilfried.hounyo1@gmail.com>",
+                            subject=msubject)
+		message.to = str(email)
+		message.body = str(msg)
+		message.html = str(msg)
+		message.send()
+
 class NotFoundHandler(BaseHandler):
 	def get(self):
 		self.render_template('404')
@@ -136,7 +145,7 @@ class SignupHandler(BaseHandler):
 			last_name=last_name, verified=False)
 		if not user_data[0]: #user_data is a tuple
 			self.display_message('Unable to create user for email %s because of \
-				duplicate keys %s' % (email_address, user_data[1]))
+				duplicate keys %s' % (email, user_data[1]))
 			return
 		
 		user = user_data[1]
@@ -147,10 +156,10 @@ class SignupHandler(BaseHandler):
 		verification_url = self.uri_for('verification', type='v', user_id=user_id,
 			signup_token=token, _full=True)
 
-		msg = 'Send an email to user in order to verify their address. \
-					They will be able to do so by visiting <a href="{url}">{url}</a>'
+		msg = 'Verify your email address by visiting <a href="{url}">{url}</a>'
 
-		self.display_message(msg.format(url=verification_url))
+		self.send_mail( msg.format(url=verification_url), 'Verify your address', email)
+		self.redirect(self.uri_for('home'))
 
 class ForgotPasswordHandler(BaseHandler):
 	def get(self):
@@ -171,10 +180,9 @@ class ForgotPasswordHandler(BaseHandler):
 		verification_url = self.uri_for('verification', type='p', user_id=user_id,
 			signup_token=token, _full=True)
 
-		msg = 'Send an email to user in order to reset their password. \
-					They will be able to do so by visiting <a href="{url}">{url}</a>'
-
-		self.display_message(msg.format(url=verification_url))
+		msg = 'Reset your password by visiting <a href="{url}">{url}</a>'
+		self.send_mail( msg.format(url=verification_url), 'Password Reset', email)
+		self.redirect(self.uri_for('home'))
 	
 	def _serve_page(self, not_found=False):
 		email = self.request.get('email')
