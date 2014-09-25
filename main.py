@@ -14,7 +14,12 @@ import webapp2
 import logging
 import jinja2
 import time
+import json
+import yaml
 import os
+
+with open('conf') as config_file:
+	config =  yaml.safe_load(config_file.read())
 
 jinja_environment = jinja2.Environment(loader=
 		jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -110,7 +115,7 @@ class BaseHandler(webapp2.RequestHandler):
 		NotFoundHandler(self)
 
 	def send_mail(self, msg, msubject, email):
-		message = mail.EmailMessage(sender="CoLabs Support <wilfried.hounyo1@gmail.com>",
+		message = mail.EmailMessage(sender="CoLabs Support {0}".format(config['mailers']['emails']),
                             subject=msubject)
 		message.to = str(email)
 		message.body = str(msg)
@@ -209,7 +214,7 @@ class VerificationHandler(BaseHandler):
 		if not user:
 			logging.info('Could not find any user with id "%s" signup token "%s"',
 				user_id, signup_token)
-			self.abort()
+			self.abort(404)
 
 		# store user data in the session
 		self.auth.set_session(self.auth.store.user_to_dict(user), remember=True)
@@ -233,7 +238,7 @@ class VerificationHandler(BaseHandler):
 			self.render_template('resetpassword', params)
 		else:
 			logging.info('verification type not supported')
-			self.abort()
+			self.abort(404)
 
 class SetPasswordHandler(BaseHandler):
 	@user_required
@@ -285,16 +290,6 @@ class LogoutHandler(BaseHandler):
 		self.auth.unset_session()
 		self.redirect(self.uri_for('home'))
 
-config = {
-	'webapp2_extras.auth': {
-		'user_model': 'models.User',
-		'user_attributes': ['name']
-	},
-	'webapp2_extras.sessions': {
-		'secret_key': '{z-0NJ]?VmFZTWvHX{;jGzO<c4-@Uk58 b|Ak }_wu+1mWk )>Vc5K7{b--fj%%l'
-	}
-}
-
 # End Authentication?
 
 class ProfileHandler(BaseHandler):
@@ -307,7 +302,7 @@ class ProfileHandler(BaseHandler):
 
 		local_user = User.get_by_id(user_id)
 		user = self.user
-		if request_type == 'p':
+		if request_type == 'u':
 			if local_user and local_user.name.lower() == name and local_user.key.id() == user_id:
 				query = Lab.query()
 				if local_user.key.id() == user.key.id():
@@ -320,7 +315,7 @@ class ProfileHandler(BaseHandler):
 				}
 				self.render_template('profile', params)
 			else:
-				self.display_message('The user who\'s profile you attempted to view does not exist. <a href="/p/{0}.{1}/{2}">Go your profile.</a>'.format(user.name, user.last_name, user.key.id()))
+				self.display_message('The user who\'s profile you attempted to view does not exist. <a href="/u/{0}.{1}/{2}">Go your profile.</a>'.format(user.name, user.last_name, user.key.id()))
 		else:
 			self.redirect(self.uri_for('home'))
 
@@ -386,18 +381,21 @@ class DeleteLabHandler(webapp2.RequestHandler):
 class YoutubeHandler(BaseHandler):
 	@user_required
 	def get(self):
-		self.render_template('youtube')
+		params = {
+			'api_key': config['apis']['youtube']['key']
+		}
+		self.render_template('youtube', params)
 
 routes = [
 		webapp2.Route('/', MainHandler, name='home'),
 		webapp2.Route('/signup', SignupHandler),
 		webapp2.Route('/<type:v|p>/<user_id:\d+>-<signup_token:.+>',
 			handler=VerificationHandler, name='verification'),
-		webapp2.Route('/<type:l|p>/<lab_id:\d+>',
+		webapp2.Route('/<type:l>/<lab_id:\d+>',
 			handler=LabHandler, name='lab'),
 		webapp2.Route('/new_lab',
 			handler=NewLabHandler, name='newlab'),
-		webapp2.Route('/<type:u|p>/<name:.+>.<last_name:.+>/<user_id:\d+>',
+		webapp2.Route('/<type:u>/<name:.+>.<last_name:.+>/<user_id:\d+>',
 			handler=ProfileHandler, name='profile'),
 		webapp2.Route('/delete_lab', DeleteLabHandler),
 		webapp2.Route('/password', SetPasswordHandler),

@@ -52,7 +52,7 @@ li {
 	};
 
 	function populate() {
-		var youtube = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=<your-api-key-here>";
+		var youtube = "https://www.googleapis.com/youtube/v3/search?part=snippet&key={{api_key}}";
 	 	var params = { "q": $("#searchbox").val(), "orderby": "relevance", "maxResults": "20"};
 	 	$.getJSON(youtube, params, DisplayVideos);
 	}

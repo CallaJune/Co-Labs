@@ -15,7 +15,7 @@ class User(webapp2_extras.appengine.auth.models.User):
     """
     self.password = security.generate_password_hash(raw_password, length=12)
   def profile_link(self):
-    return "/p/{0}.{1}/{2}".format(self.name, self.last_name, self.key.id())
+    return "/u/{0}.{1}/{2}".format(self.name, self.last_name, self.key.id())
 
   def gravatarize(self):
     default = ""
@@ -44,20 +44,6 @@ class User(webapp2_extras.appengine.auth.models.User):
         return user, timestamp
 
     return None, None
-
-"""
-    check = True
-    i = 0
-    while check:
-        i += 1
-        user = self.user_model.get_by_auth_id(username)
-        if not user:
-            check = False
-        else:
-            check = True
-            username += '.' + str(i)
-    user_name = username
-"""
 
 class Lab(ndb.Model):
   name = ndb.StringProperty(required=True)
