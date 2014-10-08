@@ -9,6 +9,7 @@ models.pyc
 *.iws
 .idea/
 out/
+conf
 local.properties
  
 # Generic Android ignores #
