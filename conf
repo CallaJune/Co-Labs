@@ -1,0 +1,10 @@
+webapp2_extras.auth: 
+ user_model: models.User
+ user_attributes: ["name"]
+webapp2_extras.sessions:
+ secret_key: <input your user authentication secret key here>
+apis: 
+ youtube:
+  key:<input your youtube api key here>
+mailers: 
+ emails: <input your mailing email here>
