@@ -11,34 +11,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/s/parsley.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.2/parsley.js"></script>    
-    <style type="text/css">
-        #intro, #learn, #join, #aboutus
-        {
-            height: 100%;
-            width: 100%;
-        }
-        .circle 
-        { 
-            width: 150px;
-            height: 150px;
-            border: 7px solid #fff;
-            border-radius: 200px 200px 200px 200px;
-            -moz-border-radius: 200px 200px 200px 200px;
-            -webkit-border-radius: 200px 200px 200px 200px;
-        }
-        .center
-        {
-            width: 80%;
-            height: 70%;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
-        .marginless
-        {
-            margin-bottom: 0px
-        }
-    </style>
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <!-- Navigation -->
@@ -49,75 +21,63 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="hidden">
-                        <a class="page-scroll" href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#learn">Learn</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#join">Join</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#aboutus">About Us</a>
-                    </li>
+                    <li class="hidden"><a class="page-scroll" href="#page-top"></a></li>
+                    <li><a class="page-scroll" href="#learn">Learn</a></li>
+                    <li><a class="page-scroll" href="#join">Join</a></li>
+                    <li><a class="page-scroll" href="#aboutus">About Us</a></li>
                 </ul>
-        		<div class="navbar-form navbar-right">
-        			<a class="btn btn-primary" href="/login">Login</a>
-        		</div>
+                <div class="navbar-form navbar-right">
+                    <a class="btn btn-primary" href="/login">Login</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <div id="intro" class="container intro-section">
+    <div id="intro" class="container">
         <h1 id="greeting">Coding. Searching. Collaborating. All in one tab.</h1>
         <br>
         <a class="btn-circle page-scroll fa fa-angle-double-down animated" href="#learn"></a>
     </div>
-    <div id="codingXp" class="container learn-section"></div>
-    <div id="learn" class="container learn-section">
+    <div id="codingXp" class="container"></div>
+    <div id="learn" class="container">
         <h1>Learn</h1>
         <p>In an impersonal world populated by tab-ridden browsers, CoLabs provides
         a sleek interface </p><p>that allows developers to research and code together, all in one tab.</p>
-        <img src="s/images/screenshot.png" width="500"/>
+        <img id="learnPic" src="s/images/screenshot.png" width="500"/>
         <br><br>
         <a class="btn-circle page-scroll fa fa-angle-double-down animated" href="#join"></a>
     </div>
 
-    <div id="join" class="go-section">
+    <div id="join">
         {% block maincontent %}{% endblock %}
     </div>
 
     <div id="aboutus" class="container">
         <h1>About Us</h1>
         <br />
-        <table class="center">
-            <tbody>
-            <tr>
-                <th class="text-center">
-                    <img class="circle" src="s/images/marcial.png" />
-                    <h2 class="marginless">Marcial</h2>
-                    <div>Designer</div>
-                </th>
-                <th class="text-center">
-                    <img class="circle" src="s/images/calla.jpg" />
-                    <h2 class="marginless">Calla</h2>
-                    <div>Frontend Engineer</div>                    
-                </th>
-                <th class="text-center">
-                    <img class="circle" src="s/images/wilfred.png" />
-                    <h2 class="marginless">Wilfried</h2>
-                    <div>Backend Engineer</div>
-                </th>
-                </tr>
-                <tr class="text-center">
-                    <img  src="s/images/cssilogo.png" />
-                    <div><p>This webapp was created at <a  href="http://www.google.com/edu/programs/computer-science-summer-institute-cssi/"> Google CSSI</a> in Summer 201.</p></div>
-                    <h2 class="marginless">Note: This demo is no longer maintained.</h2>
-                    <h2 class="marginless">For the open source project folowing up to this go to: <a  href="https://github.com/memsy">Memsy</a></h2>
-                </tr>
-            </tbody>
-        </table>
+        <div class="center">
+            <div class="text-center col-sm-4">
+                <img class="circle" src="s/images/marcial.PNG" />
+                <h2 class="marginless">Marcial</h2>
+                <div>Designer</div>
+            </div>
+            <div class="text-center col-sm-4">
+                <img class="circle" src="s/images/calla.jpg" />
+                <h2 class="marginless">Calla</h2>
+                <div>Frontend Engineer</div>
+            </div>
+            <div class="text-center col-sm-4">
+                <img class="circle" src="s/images/wilfred.png" />
+                <h2 class="marginless">Wilfried</h2>
+                <div>Backend Engineer</div>
+            </div>
+        </div>
+        <img id="cssiLogo" src="s/images/cssilogo.png" />
+        <div class="text-center">
+            <h4><p>This webapp was created at <a  href="http://www.google.com/edu/programs/computer-science-summer-institute-cssi/"> Google CSSI</a> in Summer 2014.</p></h4>
+            <h3 class="marginless"><b>Note:</b> This demo is no longer maintained.</h3>
+            <h3 class="marginless">For the open source project folowing up to this go to: <a  href="https://github.com/memsy">Memsy</a></h3>
+        </div>
     </div>
 </body>
 </html>
